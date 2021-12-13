@@ -1,0 +1,6414 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: query_root
+    subscription: subscription_root
+}
+
+"columns and relationships of \"attribute\""
+type attribute {
+    "An array relationship"
+    attribute_tokens(
+        "distinct select on columns"
+        distinct_on: [token_attribute_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [token_attribute_order_by!],
+        "filter the rows returned"
+        where: token_attribute_bool_exp
+    ): [token_attribute!]!
+    count: bigint!
+    "An object relationship"
+    fa2: fa2!
+    fa2_id: String!
+    id: bigint!
+    name: String!
+    type: String
+    value: String!
+}
+
+"columns and relationships of \"dipdup_contract\""
+type dipdup_contract {
+    address: String!
+    created_at: timestamptz!
+    name: String!
+    typename: String
+    updated_at: timestamptz!
+}
+
+"columns and relationships of \"dipdup_head\""
+type dipdup_head {
+    created_at: timestamptz!
+    hash: String!
+    level: Int!
+    name: String!
+    timestamp: timestamptz!
+    updated_at: timestamptz!
+}
+
+"columns and relationships of \"dipdup_index\""
+type dipdup_index {
+    config_hash: String!
+    created_at: timestamptz!
+    level: Int!
+    name: String!
+    "NEW: NEW\\nSYNCING: SYNCING\\nREALTIME: REALTIME\\nROLLBACK: ROLLBACK\\nONESHOT: ONESHOT"
+    status: String!
+    template: String
+    template_values(
+        "JSON select path"
+        path: String
+    ): jsonb
+    "operation: operation\\nbig_map: big_map\\nhead: head"
+    type: String!
+    updated_at: timestamptz!
+}
+
+"columns and relationships of \"dipdup_schema\""
+type dipdup_schema {
+    created_at: timestamptz!
+    hash: String!
+    name: String!
+    "MANUAL: triggered manually from callback\\nMIGRATION: applied migration requires reindexing\\nROLLBACK: reorg message received and can't be processed\\nCONFIG_HASH_MISMATCH: index config has been modified\\nSCHEMA_HASH_MISMATCH: database schema has been modified\\nBLOCK_HASH_MISMATCH: block hash mismatch, missed rollback when DipDup was stopped\\nMISSING_INDEX_TEMPLATE: index template is missing, can't restore index state"
+    reindex: String
+    updated_at: timestamptz!
+}
+
+"columns and relationships of \"event\""
+type event {
+    amount: bigint!
+    "An object relationship"
+    creator: holder!
+    creator_id: String!
+    event_type: event_type!
+    "An object relationship"
+    fa2: fa2!
+    fa2_id: String!
+    id: bigint!
+    ob_contract: Boolean!
+    price: bigint
+    "An object relationship"
+    recipient: holder
+    recipient_id: String
+    timestamp: timestamptz!
+    "An object relationship"
+    token: token!
+    token_id: bigint!
+}
+
+"columns and relationships of \"fa2\""
+type fa2 {
+    active_auctions: bigint!
+    active_listing: bigint!
+    "An array relationship"
+    asks(
+        "distinct select on columns"
+        distinct_on: [obj_ask_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_ask_order_by!],
+        "filter the rows returned"
+        where: obj_ask_bool_exp
+    ): [obj_ask!]!
+    "An array relationship"
+    attributes(
+        "distinct select on columns"
+        distinct_on: [attribute_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [attribute_order_by!],
+        "filter the rows returned"
+        where: attribute_bool_exp
+    ): [attribute!]!
+    "An array relationship"
+    bids(
+        "distinct select on columns"
+        distinct_on: [obj_bid_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_bid_order_by!],
+        "filter the rows returned"
+        where: obj_bid_bool_exp
+    ): [obj_bid!]!
+    category: String
+    "An array relationship"
+    collaborators(
+        "distinct select on columns"
+        distinct_on: [fa2_collaborators_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [fa2_collaborators_order_by!],
+        "filter the rows returned"
+        where: fa2_collaborators_bool_exp
+    ): [fa2_collaborators!]!
+    collection_id: bigint
+    collection_type: collection_type!
+    contract: String!
+    "An object relationship"
+    creator: holder
+    creator_id: String
+    description: String
+    "An array relationship"
+    dutch_auctions(
+        "distinct select on columns"
+        distinct_on: [obj_dutch_auction_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_dutch_auction_order_by!],
+        "filter the rows returned"
+        where: obj_dutch_auction_bool_exp
+    ): [obj_dutch_auction!]!
+    "An array relationship"
+    english_auctions(
+        "distinct select on columns"
+        distinct_on: [obj_english_auction_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_english_auction_order_by!],
+        "filter the rows returned"
+        where: obj_english_auction_bool_exp
+    ): [obj_english_auction!]!
+    "An array relationship"
+    events(
+        "distinct select on columns"
+        distinct_on: [event_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [event_order_by!],
+        "filter the rows returned"
+        where: event_bool_exp
+    ): [event!]!
+    floor_price: bigint
+    force_metadata_update: Boolean!
+    items: bigint!
+    last_metadata_update: timestamptz
+    level: bigint
+    live: Boolean!
+    logo: String
+    metadata: String!
+    name: String
+    owners: bigint!
+    path: String
+    short_name: String
+    timestamp: timestamptz
+    token_link: String
+    "An array relationship"
+    tokens(
+        "distinct select on columns"
+        distinct_on: [token_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [token_order_by!],
+        "filter the rows returned"
+        where: token_bool_exp
+    ): [token!]!
+    twitter: String
+    type: String
+    volume_24h: bigint!
+    volume_total: bigint!
+    website: String
+}
+
+"columns and relationships of \"fa2_collaborators\""
+type fa2_collaborators {
+    "An object relationship"
+    collaborator: holder!
+    collaborator_id: String!
+    "An object relationship"
+    fa2: fa2!
+    fa2_id: String!
+    id: Int!
+    signed: Boolean!
+}
+
+"columns and relationships of \"hen_shareholder\""
+type hen_shareholder {
+    "An object relationship"
+    holder: holder!
+    holder_id: String!
+    holder_type: shareholder_status_type!
+    id: Int!
+    shares: bigint!
+    "An object relationship"
+    split_contract: hen_split_contract!
+    split_contract_id: Int!
+}
+
+"columns and relationships of \"hen_split_contract\""
+type hen_split_contract {
+    administrator: String
+    "An object relationship"
+    contract: holder!
+    contract_id: String!
+    id: Int!
+    "An array relationship"
+    shareholder(
+        "distinct select on columns"
+        distinct_on: [hen_shareholder_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_shareholder_order_by!],
+        "filter the rows returned"
+        where: hen_shareholder_bool_exp
+    ): [hen_shareholder!]!
+    total_shares: bigint
+}
+
+"columns and relationships of \"hen_split_signature\""
+type hen_split_signature {
+    "An object relationship"
+    holder: holder!
+    holder_id: String!
+    id: Int!
+    "An object relationship"
+    token: token!
+    token_id: bigint!
+}
+
+"columns and relationships of \"hen_swap\""
+type hen_swap {
+    amount: smallint!
+    amount_left: smallint!
+    contract_version: smallint!
+    "An object relationship"
+    creator: holder!
+    creator_id: String!
+    id: bigint!
+    is_valid: Boolean!
+    level: bigint!
+    price: bigint!
+    royalties: smallint!
+    status: swap_status_type!
+    timestamp: timestamptz!
+    "An object relationship"
+    token: token!
+    token_id: bigint!
+    "An array relationship"
+    trades(
+        "distinct select on columns"
+        distinct_on: [hen_trade_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_trade_order_by!],
+        "filter the rows returned"
+        where: hen_trade_bool_exp
+    ): [hen_trade!]!
+}
+
+"columns and relationships of \"hen_trade\""
+type hen_trade {
+    amount: bigint!
+    "An object relationship"
+    buyer: holder!
+    buyer_id: String!
+    id: bigint!
+    level: bigint!
+    "An object relationship"
+    seller: holder!
+    seller_id: String!
+    "An object relationship"
+    swap: hen_swap!
+    swap_id: bigint!
+    timestamp: timestamptz!
+    "An object relationship"
+    token: token!
+    token_id: bigint!
+}
+
+"columns and relationships of \"holder\""
+type holder {
+    address: String!
+    alias: String!
+    "An array relationship"
+    asks(
+        "distinct select on columns"
+        distinct_on: [obj_ask_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_ask_order_by!],
+        "filter the rows returned"
+        where: obj_ask_bool_exp
+    ): [obj_ask!]!
+    "An array relationship"
+    bids(
+        "distinct select on columns"
+        distinct_on: [obj_bid_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_bid_order_by!],
+        "filter the rows returned"
+        where: obj_bid_bool_exp
+    ): [obj_bid!]!
+    "An array relationship"
+    bought_asks(
+        "distinct select on columns"
+        distinct_on: [obj_fulfilled_ask_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_fulfilled_ask_order_by!],
+        "filter the rows returned"
+        where: obj_fulfilled_ask_bool_exp
+    ): [obj_fulfilled_ask!]!
+    "An array relationship"
+    collaborations(
+        "distinct select on columns"
+        distinct_on: [fa2_collaborators_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [fa2_collaborators_order_by!],
+        "filter the rows returned"
+        where: fa2_collaborators_bool_exp
+    ): [fa2_collaborators!]!
+    "An array relationship"
+    collections(
+        "distinct select on columns"
+        distinct_on: [fa2_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [fa2_order_by!],
+        "filter the rows returned"
+        where: fa2_bool_exp
+    ): [fa2!]!
+    "An array relationship"
+    created_dutch_auctions(
+        "distinct select on columns"
+        distinct_on: [obj_dutch_auction_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_dutch_auction_order_by!],
+        "filter the rows returned"
+        where: obj_dutch_auction_bool_exp
+    ): [obj_dutch_auction!]!
+    "An array relationship"
+    created_english_auctions(
+        "distinct select on columns"
+        distinct_on: [obj_english_auction_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_english_auction_order_by!],
+        "filter the rows returned"
+        where: obj_english_auction_bool_exp
+    ): [obj_english_auction!]!
+    description: String!
+    discord: String!
+    "An array relationship"
+    domain_records(
+        "distinct select on columns"
+        distinct_on: [tzd_record_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [tzd_record_order_by!],
+        "filter the rows returned"
+        where: tzd_record_bool_exp
+    ): [tzd_record!]!
+    email: String!
+    "An array relationship"
+    english_bids(
+        "distinct select on columns"
+        distinct_on: [obj_english_bid_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_english_bid_order_by!],
+        "filter the rows returned"
+        where: obj_english_bid_bool_exp
+    ): [obj_english_bid!]!
+    "An array relationship"
+    events(
+        "distinct select on columns"
+        distinct_on: [event_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [event_order_by!],
+        "filter the rows returned"
+        where: event_bool_exp
+    ): [event!]!
+    "An array relationship"
+    events_from(
+        "distinct select on columns"
+        distinct_on: [event_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [event_order_by!],
+        "filter the rows returned"
+        where: event_bool_exp
+    ): [event!]!
+    facebook: String!
+    flag: flag_type!
+    github: String!
+    gitlab: String!
+    "An array relationship"
+    highest_english_bids(
+        "distinct select on columns"
+        distinct_on: [obj_english_auction_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_english_auction_order_by!],
+        "filter the rows returned"
+        where: obj_english_auction_bool_exp
+    ): [obj_english_auction!]!
+    "An array relationship"
+    holder_signatures(
+        "distinct select on columns"
+        distinct_on: [hen_split_signature_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_split_signature_order_by!],
+        "filter the rows returned"
+        where: hen_split_signature_bool_exp
+    ): [hen_split_signature!]!
+    holder_type: holder_type!
+    "An array relationship"
+    holders_token(
+        "distinct select on columns"
+        distinct_on: [token_holder_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [token_holder_order_by!],
+        "filter the rows returned"
+        where: token_holder_bool_exp
+    ): [token_holder!]!
+    instagram: String!
+    last_metadata_update: timestamptz!
+    medium: String!
+    "An array relationship"
+    purchases(
+        "distinct select on columns"
+        distinct_on: [hen_trade_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_trade_order_by!],
+        "filter the rows returned"
+        where: hen_trade_bool_exp
+    ): [hen_trade!]!
+    reddit: String!
+    "An array relationship"
+    sales(
+        "distinct select on columns"
+        distinct_on: [hen_trade_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_trade_order_by!],
+        "filter the rows returned"
+        where: hen_trade_bool_exp
+    ): [hen_trade!]!
+    "An array relationship"
+    sales_stat(
+        "distinct select on columns"
+        distinct_on: [sales_stat_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [sales_stat_order_by!],
+        "filter the rows returned"
+        where: sales_stat_bool_exp
+    ): [sales_stat!]!
+    "An array relationship"
+    shareholder(
+        "distinct select on columns"
+        distinct_on: [hen_shareholder_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_shareholder_order_by!],
+        "filter the rows returned"
+        where: hen_shareholder_bool_exp
+    ): [hen_shareholder!]!
+    "An array relationship"
+    shares(
+        "distinct select on columns"
+        distinct_on: [hen_split_contract_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_split_contract_order_by!],
+        "filter the rows returned"
+        where: hen_split_contract_bool_exp
+    ): [hen_split_contract!]!
+    site: String!
+    slack: String!
+    "An array relationship"
+    sold_asks(
+        "distinct select on columns"
+        distinct_on: [obj_fulfilled_ask_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_fulfilled_ask_order_by!],
+        "filter the rows returned"
+        where: obj_fulfilled_ask_bool_exp
+    ): [obj_fulfilled_ask!]!
+    "An array relationship"
+    sold_bids(
+        "distinct select on columns"
+        distinct_on: [obj_bid_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_bid_order_by!],
+        "filter the rows returned"
+        where: obj_bid_bool_exp
+    ): [obj_bid!]!
+    "An array relationship"
+    starring_asks(
+        "distinct select on columns"
+        distinct_on: [obj_ask_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_ask_order_by!],
+        "filter the rows returned"
+        where: obj_ask_bool_exp
+    ): [obj_ask!]!
+    "An array relationship"
+    starring_bids(
+        "distinct select on columns"
+        distinct_on: [obj_bid_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_bid_order_by!],
+        "filter the rows returned"
+        where: obj_bid_bool_exp
+    ): [obj_bid!]!
+    "An array relationship"
+    starring_dutch_auctions(
+        "distinct select on columns"
+        distinct_on: [obj_dutch_auction_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_dutch_auction_order_by!],
+        "filter the rows returned"
+        where: obj_dutch_auction_bool_exp
+    ): [obj_dutch_auction!]!
+    "An array relationship"
+    starring_english_auctions(
+        "distinct select on columns"
+        distinct_on: [obj_english_auction_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_english_auction_order_by!],
+        "filter the rows returned"
+        where: obj_english_auction_bool_exp
+    ): [obj_english_auction!]!
+    support: String!
+    "An array relationship"
+    swaps(
+        "distinct select on columns"
+        distinct_on: [hen_swap_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_swap_order_by!],
+        "filter the rows returned"
+        where: hen_swap_bool_exp
+    ): [hen_swap!]!
+    telegram: String!
+    "An array relationship"
+    tokens(
+        "distinct select on columns"
+        distinct_on: [token_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [token_order_by!],
+        "filter the rows returned"
+        where: token_bool_exp
+    ): [token!]!
+    twitter: String!
+    tzdomain: String!
+    "An array relationship"
+    won_dutch_auctions(
+        "distinct select on columns"
+        distinct_on: [obj_dutch_auction_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_dutch_auction_order_by!],
+        "filter the rows returned"
+        where: obj_dutch_auction_bool_exp
+    ): [obj_dutch_auction!]!
+}
+
+"columns and relationships of \"obj_ask\""
+type obj_ask {
+    amount: bigint!
+    amount_left: bigint!
+    "An object relationship"
+    artist: holder!
+    artist_id: String!
+    "An object relationship"
+    creator: holder!
+    creator_id: String!
+    "An object relationship"
+    fa2: fa2!
+    fa2_id: String!
+    "An array relationship"
+    fulfilled(
+        "distinct select on columns"
+        distinct_on: [obj_fulfilled_ask_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_fulfilled_ask_order_by!],
+        "filter the rows returned"
+        where: obj_fulfilled_ask_bool_exp
+    ): [obj_fulfilled_ask!]!
+    id: bigint!
+    level: bigint!
+    price: bigint!
+    royalties: bigint!
+    status: auction_status_type!
+    timestamp: timestamptz!
+    "An object relationship"
+    token: token!
+    token_id: bigint!
+    update_level: bigint
+    update_timestamp: timestamptz
+}
+
+"columns and relationships of \"obj_bid\""
+type obj_bid {
+    "An object relationship"
+    artist: holder!
+    artist_id: String!
+    "An object relationship"
+    creator: holder!
+    creator_id: String!
+    "An object relationship"
+    fa2: fa2!
+    fa2_id: String!
+    id: bigint!
+    level: bigint!
+    price: bigint!
+    royalties: bigint!
+    "An object relationship"
+    seller: holder
+    seller_id: String
+    status: auction_status_type!
+    timestamp: timestamptz!
+    "An object relationship"
+    token: token!
+    token_id: bigint!
+    update_level: bigint
+    update_timestamp: timestamptz
+}
+
+"columns and relationships of \"obj_dutch_auction\""
+type obj_dutch_auction {
+    "An object relationship"
+    artist: holder!
+    artist_id: String!
+    buy_price: bigint
+    "An object relationship"
+    buyer: holder
+    buyer_id: String
+    contract_version: smallint!
+    "An object relationship"
+    creator: holder!
+    creator_id: String!
+    end_price: bigint!
+    end_time: timestamptz!
+    "An object relationship"
+    fa2: fa2!
+    fa2_id: String!
+    hash: String!
+    id: bigint!
+    level: bigint!
+    royalties: bigint!
+    start_price: bigint!
+    start_time: timestamptz!
+    status: auction_status_type!
+    timestamp: timestamptz!
+    "An object relationship"
+    token: token!
+    token_id: bigint!
+    update_level: bigint
+    update_timestamp: timestamptz
+}
+
+"columns and relationships of \"obj_english_auction\""
+type obj_english_auction {
+    "An object relationship"
+    artist: holder!
+    artist_id: String!
+    "An array relationship"
+    bids(
+        "distinct select on columns"
+        distinct_on: [obj_english_bid_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_english_bid_order_by!],
+        "filter the rows returned"
+        where: obj_english_bid_bool_exp
+    ): [obj_english_bid!]!
+    contract_version: smallint!
+    "An object relationship"
+    creator: holder!
+    creator_id: String!
+    end_time: timestamptz!
+    extension_time: bigint!
+    "An object relationship"
+    fa2: fa2!
+    fa2_id: String!
+    hash: String!
+    highest_bid: bigint!
+    "An object relationship"
+    highest_bidder: holder
+    highest_bidder_id: String
+    id: bigint!
+    level: bigint!
+    price_increment: bigint!
+    reserve: bigint!
+    royalties: bigint!
+    start_time: timestamptz!
+    status: auction_status_type!
+    timestamp: timestamptz!
+    "An object relationship"
+    token: token!
+    token_id: bigint!
+    update_level: bigint
+    update_timestamp: timestamptz
+}
+
+"columns and relationships of \"obj_english_bid\""
+type obj_english_bid {
+    amount: bigint!
+    "An object relationship"
+    auction: obj_english_auction!
+    auction_id: bigint!
+    "An object relationship"
+    bidder: holder!
+    bidder_id: String!
+    id: bigint!
+    level: bigint!
+    timestamp: timestamptz!
+}
+
+"columns and relationships of \"obj_fulfilled_ask\""
+type obj_fulfilled_ask {
+    amount: bigint!
+    "An object relationship"
+    ask: obj_ask!
+    ask_id: bigint!
+    "An object relationship"
+    buyer: holder!
+    buyer_id: String!
+    id: bigint!
+    level: bigint!
+    price: bigint!
+    "An object relationship"
+    seller: holder!
+    seller_id: String!
+    timestamp: timestamptz!
+    "An object relationship"
+    token: token!
+    token_id: bigint!
+}
+
+type query_root {
+    "fetch data from the table: \"attribute\""
+    attribute(
+        "distinct select on columns"
+        distinct_on: [attribute_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [attribute_order_by!],
+        "filter the rows returned"
+        where: attribute_bool_exp
+    ): [attribute!]!
+    "fetch data from the table: \"attribute\" using primary key columns"
+    attribute_by_pk(id: bigint!): attribute
+    "fetch data from the table: \"dipdup_contract\""
+    dipdup_contract(
+        "distinct select on columns"
+        distinct_on: [dipdup_contract_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [dipdup_contract_order_by!],
+        "filter the rows returned"
+        where: dipdup_contract_bool_exp
+    ): [dipdup_contract!]!
+    "fetch data from the table: \"dipdup_contract\" using primary key columns"
+    dipdup_contract_by_pk(name: String!): dipdup_contract
+    "fetch data from the table: \"dipdup_head\""
+    dipdup_head(
+        "distinct select on columns"
+        distinct_on: [dipdup_head_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [dipdup_head_order_by!],
+        "filter the rows returned"
+        where: dipdup_head_bool_exp
+    ): [dipdup_head!]!
+    "fetch data from the table: \"dipdup_head\" using primary key columns"
+    dipdup_head_by_pk(name: String!): dipdup_head
+    "fetch data from the table: \"dipdup_index\""
+    dipdup_index(
+        "distinct select on columns"
+        distinct_on: [dipdup_index_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [dipdup_index_order_by!],
+        "filter the rows returned"
+        where: dipdup_index_bool_exp
+    ): [dipdup_index!]!
+    "fetch data from the table: \"dipdup_index\" using primary key columns"
+    dipdup_index_by_pk(name: String!): dipdup_index
+    "fetch data from the table: \"dipdup_schema\""
+    dipdup_schema(
+        "distinct select on columns"
+        distinct_on: [dipdup_schema_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [dipdup_schema_order_by!],
+        "filter the rows returned"
+        where: dipdup_schema_bool_exp
+    ): [dipdup_schema!]!
+    "fetch data from the table: \"dipdup_schema\" using primary key columns"
+    dipdup_schema_by_pk(name: String!): dipdup_schema
+    "fetch data from the table: \"event\""
+    event(
+        "distinct select on columns"
+        distinct_on: [event_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [event_order_by!],
+        "filter the rows returned"
+        where: event_bool_exp
+    ): [event!]!
+    "fetch data from the table: \"event\" using primary key columns"
+    event_by_pk(id: bigint!): event
+    "fetch data from the table: \"fa2\""
+    fa2(
+        "distinct select on columns"
+        distinct_on: [fa2_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [fa2_order_by!],
+        "filter the rows returned"
+        where: fa2_bool_exp
+    ): [fa2!]!
+    "fetch data from the table: \"fa2\" using primary key columns"
+    fa2_by_pk(contract: String!): fa2
+    "fetch data from the table: \"fa2_collaborators\""
+    fa2_collaborators(
+        "distinct select on columns"
+        distinct_on: [fa2_collaborators_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [fa2_collaborators_order_by!],
+        "filter the rows returned"
+        where: fa2_collaborators_bool_exp
+    ): [fa2_collaborators!]!
+    "fetch data from the table: \"fa2_collaborators\" using primary key columns"
+    fa2_collaborators_by_pk(id: Int!): fa2_collaborators
+    "fetch data from the table: \"hen_shareholder\""
+    hen_shareholder(
+        "distinct select on columns"
+        distinct_on: [hen_shareholder_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_shareholder_order_by!],
+        "filter the rows returned"
+        where: hen_shareholder_bool_exp
+    ): [hen_shareholder!]!
+    "fetch data from the table: \"hen_shareholder\" using primary key columns"
+    hen_shareholder_by_pk(id: Int!): hen_shareholder
+    "fetch data from the table: \"hen_split_contract\""
+    hen_split_contract(
+        "distinct select on columns"
+        distinct_on: [hen_split_contract_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_split_contract_order_by!],
+        "filter the rows returned"
+        where: hen_split_contract_bool_exp
+    ): [hen_split_contract!]!
+    "fetch data from the table: \"hen_split_contract\" using primary key columns"
+    hen_split_contract_by_pk(id: Int!): hen_split_contract
+    "fetch data from the table: \"hen_split_signature\""
+    hen_split_signature(
+        "distinct select on columns"
+        distinct_on: [hen_split_signature_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_split_signature_order_by!],
+        "filter the rows returned"
+        where: hen_split_signature_bool_exp
+    ): [hen_split_signature!]!
+    "fetch data from the table: \"hen_split_signature\" using primary key columns"
+    hen_split_signature_by_pk(id: Int!): hen_split_signature
+    "fetch data from the table: \"hen_swap\""
+    hen_swap(
+        "distinct select on columns"
+        distinct_on: [hen_swap_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_swap_order_by!],
+        "filter the rows returned"
+        where: hen_swap_bool_exp
+    ): [hen_swap!]!
+    "fetch data from the table: \"hen_swap\" using primary key columns"
+    hen_swap_by_pk(id: bigint!): hen_swap
+    "fetch data from the table: \"hen_trade\""
+    hen_trade(
+        "distinct select on columns"
+        distinct_on: [hen_trade_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_trade_order_by!],
+        "filter the rows returned"
+        where: hen_trade_bool_exp
+    ): [hen_trade!]!
+    "fetch data from the table: \"hen_trade\" using primary key columns"
+    hen_trade_by_pk(id: bigint!): hen_trade
+    "fetch data from the table: \"holder\""
+    holder(
+        "distinct select on columns"
+        distinct_on: [holder_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [holder_order_by!],
+        "filter the rows returned"
+        where: holder_bool_exp
+    ): [holder!]!
+    "fetch data from the table: \"holder\" using primary key columns"
+    holder_by_pk(address: String!): holder
+    "fetch data from the table: \"obj_ask\""
+    obj_ask(
+        "distinct select on columns"
+        distinct_on: [obj_ask_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_ask_order_by!],
+        "filter the rows returned"
+        where: obj_ask_bool_exp
+    ): [obj_ask!]!
+    "fetch data from the table: \"obj_ask\" using primary key columns"
+    obj_ask_by_pk(id: bigint!): obj_ask
+    "fetch data from the table: \"obj_bid\""
+    obj_bid(
+        "distinct select on columns"
+        distinct_on: [obj_bid_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_bid_order_by!],
+        "filter the rows returned"
+        where: obj_bid_bool_exp
+    ): [obj_bid!]!
+    "fetch data from the table: \"obj_bid\" using primary key columns"
+    obj_bid_by_pk(id: bigint!): obj_bid
+    "fetch data from the table: \"obj_dutch_auction\""
+    obj_dutch_auction(
+        "distinct select on columns"
+        distinct_on: [obj_dutch_auction_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_dutch_auction_order_by!],
+        "filter the rows returned"
+        where: obj_dutch_auction_bool_exp
+    ): [obj_dutch_auction!]!
+    "fetch data from the table: \"obj_dutch_auction\" using primary key columns"
+    obj_dutch_auction_by_pk(id: bigint!): obj_dutch_auction
+    "fetch data from the table: \"obj_english_auction\""
+    obj_english_auction(
+        "distinct select on columns"
+        distinct_on: [obj_english_auction_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_english_auction_order_by!],
+        "filter the rows returned"
+        where: obj_english_auction_bool_exp
+    ): [obj_english_auction!]!
+    "fetch data from the table: \"obj_english_auction\" using primary key columns"
+    obj_english_auction_by_pk(id: bigint!): obj_english_auction
+    "fetch data from the table: \"obj_english_bid\""
+    obj_english_bid(
+        "distinct select on columns"
+        distinct_on: [obj_english_bid_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_english_bid_order_by!],
+        "filter the rows returned"
+        where: obj_english_bid_bool_exp
+    ): [obj_english_bid!]!
+    "fetch data from the table: \"obj_english_bid\" using primary key columns"
+    obj_english_bid_by_pk(id: bigint!): obj_english_bid
+    "fetch data from the table: \"obj_fulfilled_ask\""
+    obj_fulfilled_ask(
+        "distinct select on columns"
+        distinct_on: [obj_fulfilled_ask_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_fulfilled_ask_order_by!],
+        "filter the rows returned"
+        where: obj_fulfilled_ask_bool_exp
+    ): [obj_fulfilled_ask!]!
+    "fetch data from the table: \"obj_fulfilled_ask\" using primary key columns"
+    obj_fulfilled_ask_by_pk(id: bigint!): obj_fulfilled_ask
+    "An array relationship"
+    sales_stat(
+        "distinct select on columns"
+        distinct_on: [sales_stat_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [sales_stat_order_by!],
+        "filter the rows returned"
+        where: sales_stat_bool_exp
+    ): [sales_stat!]!
+    "fetch data from the table: \"sales_stat\" using primary key columns"
+    sales_stat_by_pk(id: smallint!): sales_stat
+    "fetch data from the table: \"tag\""
+    tag(
+        "distinct select on columns"
+        distinct_on: [tag_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [tag_order_by!],
+        "filter the rows returned"
+        where: tag_bool_exp
+    ): [tag!]!
+    "fetch data from the table: \"tag\" using primary key columns"
+    tag_by_pk(id: bigint!): tag
+    "fetch data from the table: \"token\""
+    token(
+        "distinct select on columns"
+        distinct_on: [token_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [token_order_by!],
+        "filter the rows returned"
+        where: token_bool_exp
+    ): [token!]!
+    "fetch data from the table: \"token_attribute\""
+    token_attribute(
+        "distinct select on columns"
+        distinct_on: [token_attribute_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [token_attribute_order_by!],
+        "filter the rows returned"
+        where: token_attribute_bool_exp
+    ): [token_attribute!]!
+    "fetch data from the table: \"token_attribute\" using primary key columns"
+    token_attribute_by_pk(id: Int!): token_attribute
+    "fetch data from the table: \"token\" using primary key columns"
+    token_by_pk(pk_id: bigint!): token
+    "fetch data from the table: \"token_holder\""
+    token_holder(
+        "distinct select on columns"
+        distinct_on: [token_holder_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [token_holder_order_by!],
+        "filter the rows returned"
+        where: token_holder_bool_exp
+    ): [token_holder!]!
+    "fetch data from the table: \"token_holder\" using primary key columns"
+    token_holder_by_pk(id: Int!): token_holder
+    "fetch data from the table: \"token_tag\""
+    token_tag(
+        "distinct select on columns"
+        distinct_on: [token_tag_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [token_tag_order_by!],
+        "filter the rows returned"
+        where: token_tag_bool_exp
+    ): [token_tag!]!
+    "fetch data from the table: \"token_tag\" using primary key columns"
+    token_tag_by_pk(id: Int!): token_tag
+    "fetch data from the table: \"tzd_domain\""
+    tzd_domain(
+        "distinct select on columns"
+        distinct_on: [tzd_domain_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [tzd_domain_order_by!],
+        "filter the rows returned"
+        where: tzd_domain_bool_exp
+    ): [tzd_domain!]!
+    "fetch data from the table: \"tzd_domain\" using primary key columns"
+    tzd_domain_by_pk(id: String!): tzd_domain
+    "fetch data from the table: \"tzd_record\""
+    tzd_record(
+        "distinct select on columns"
+        distinct_on: [tzd_record_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [tzd_record_order_by!],
+        "filter the rows returned"
+        where: tzd_record_bool_exp
+    ): [tzd_record!]!
+    "fetch data from the table: \"tzd_record\" using primary key columns"
+    tzd_record_by_pk(id: String!): tzd_record
+    "fetch data from the table: \"tzd_tld\""
+    tzd_tld(
+        "distinct select on columns"
+        distinct_on: [tzd_tld_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [tzd_tld_order_by!],
+        "filter the rows returned"
+        where: tzd_tld_bool_exp
+    ): [tzd_tld!]!
+    "fetch data from the table: \"tzd_tld\" using primary key columns"
+    tzd_tld_by_pk(id: String!): tzd_tld
+}
+
+"columns and relationships of \"sales_stat\""
+type sales_stat {
+    id: smallint!
+    interval_days: smallint!
+    rank: smallint!
+    "An object relationship"
+    subject: holder
+    subject_id: String
+    type: sales_stat_type!
+    volume: bigint!
+}
+
+type subscription_root {
+    "fetch data from the table: \"attribute\""
+    attribute(
+        "distinct select on columns"
+        distinct_on: [attribute_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [attribute_order_by!],
+        "filter the rows returned"
+        where: attribute_bool_exp
+    ): [attribute!]!
+    "fetch data from the table: \"attribute\" using primary key columns"
+    attribute_by_pk(id: bigint!): attribute
+    "fetch data from the table: \"dipdup_contract\""
+    dipdup_contract(
+        "distinct select on columns"
+        distinct_on: [dipdup_contract_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [dipdup_contract_order_by!],
+        "filter the rows returned"
+        where: dipdup_contract_bool_exp
+    ): [dipdup_contract!]!
+    "fetch data from the table: \"dipdup_contract\" using primary key columns"
+    dipdup_contract_by_pk(name: String!): dipdup_contract
+    "fetch data from the table: \"dipdup_head\""
+    dipdup_head(
+        "distinct select on columns"
+        distinct_on: [dipdup_head_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [dipdup_head_order_by!],
+        "filter the rows returned"
+        where: dipdup_head_bool_exp
+    ): [dipdup_head!]!
+    "fetch data from the table: \"dipdup_head\" using primary key columns"
+    dipdup_head_by_pk(name: String!): dipdup_head
+    "fetch data from the table: \"dipdup_index\""
+    dipdup_index(
+        "distinct select on columns"
+        distinct_on: [dipdup_index_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [dipdup_index_order_by!],
+        "filter the rows returned"
+        where: dipdup_index_bool_exp
+    ): [dipdup_index!]!
+    "fetch data from the table: \"dipdup_index\" using primary key columns"
+    dipdup_index_by_pk(name: String!): dipdup_index
+    "fetch data from the table: \"dipdup_schema\""
+    dipdup_schema(
+        "distinct select on columns"
+        distinct_on: [dipdup_schema_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [dipdup_schema_order_by!],
+        "filter the rows returned"
+        where: dipdup_schema_bool_exp
+    ): [dipdup_schema!]!
+    "fetch data from the table: \"dipdup_schema\" using primary key columns"
+    dipdup_schema_by_pk(name: String!): dipdup_schema
+    "fetch data from the table: \"event\""
+    event(
+        "distinct select on columns"
+        distinct_on: [event_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [event_order_by!],
+        "filter the rows returned"
+        where: event_bool_exp
+    ): [event!]!
+    "fetch data from the table: \"event\" using primary key columns"
+    event_by_pk(id: bigint!): event
+    "fetch data from the table: \"fa2\""
+    fa2(
+        "distinct select on columns"
+        distinct_on: [fa2_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [fa2_order_by!],
+        "filter the rows returned"
+        where: fa2_bool_exp
+    ): [fa2!]!
+    "fetch data from the table: \"fa2\" using primary key columns"
+    fa2_by_pk(contract: String!): fa2
+    "fetch data from the table: \"fa2_collaborators\""
+    fa2_collaborators(
+        "distinct select on columns"
+        distinct_on: [fa2_collaborators_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [fa2_collaborators_order_by!],
+        "filter the rows returned"
+        where: fa2_collaborators_bool_exp
+    ): [fa2_collaborators!]!
+    "fetch data from the table: \"fa2_collaborators\" using primary key columns"
+    fa2_collaborators_by_pk(id: Int!): fa2_collaborators
+    "fetch data from the table: \"hen_shareholder\""
+    hen_shareholder(
+        "distinct select on columns"
+        distinct_on: [hen_shareholder_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_shareholder_order_by!],
+        "filter the rows returned"
+        where: hen_shareholder_bool_exp
+    ): [hen_shareholder!]!
+    "fetch data from the table: \"hen_shareholder\" using primary key columns"
+    hen_shareholder_by_pk(id: Int!): hen_shareholder
+    "fetch data from the table: \"hen_split_contract\""
+    hen_split_contract(
+        "distinct select on columns"
+        distinct_on: [hen_split_contract_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_split_contract_order_by!],
+        "filter the rows returned"
+        where: hen_split_contract_bool_exp
+    ): [hen_split_contract!]!
+    "fetch data from the table: \"hen_split_contract\" using primary key columns"
+    hen_split_contract_by_pk(id: Int!): hen_split_contract
+    "fetch data from the table: \"hen_split_signature\""
+    hen_split_signature(
+        "distinct select on columns"
+        distinct_on: [hen_split_signature_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_split_signature_order_by!],
+        "filter the rows returned"
+        where: hen_split_signature_bool_exp
+    ): [hen_split_signature!]!
+    "fetch data from the table: \"hen_split_signature\" using primary key columns"
+    hen_split_signature_by_pk(id: Int!): hen_split_signature
+    "fetch data from the table: \"hen_swap\""
+    hen_swap(
+        "distinct select on columns"
+        distinct_on: [hen_swap_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_swap_order_by!],
+        "filter the rows returned"
+        where: hen_swap_bool_exp
+    ): [hen_swap!]!
+    "fetch data from the table: \"hen_swap\" using primary key columns"
+    hen_swap_by_pk(id: bigint!): hen_swap
+    "fetch data from the table: \"hen_trade\""
+    hen_trade(
+        "distinct select on columns"
+        distinct_on: [hen_trade_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_trade_order_by!],
+        "filter the rows returned"
+        where: hen_trade_bool_exp
+    ): [hen_trade!]!
+    "fetch data from the table: \"hen_trade\" using primary key columns"
+    hen_trade_by_pk(id: bigint!): hen_trade
+    "fetch data from the table: \"holder\""
+    holder(
+        "distinct select on columns"
+        distinct_on: [holder_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [holder_order_by!],
+        "filter the rows returned"
+        where: holder_bool_exp
+    ): [holder!]!
+    "fetch data from the table: \"holder\" using primary key columns"
+    holder_by_pk(address: String!): holder
+    "fetch data from the table: \"obj_ask\""
+    obj_ask(
+        "distinct select on columns"
+        distinct_on: [obj_ask_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_ask_order_by!],
+        "filter the rows returned"
+        where: obj_ask_bool_exp
+    ): [obj_ask!]!
+    "fetch data from the table: \"obj_ask\" using primary key columns"
+    obj_ask_by_pk(id: bigint!): obj_ask
+    "fetch data from the table: \"obj_bid\""
+    obj_bid(
+        "distinct select on columns"
+        distinct_on: [obj_bid_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_bid_order_by!],
+        "filter the rows returned"
+        where: obj_bid_bool_exp
+    ): [obj_bid!]!
+    "fetch data from the table: \"obj_bid\" using primary key columns"
+    obj_bid_by_pk(id: bigint!): obj_bid
+    "fetch data from the table: \"obj_dutch_auction\""
+    obj_dutch_auction(
+        "distinct select on columns"
+        distinct_on: [obj_dutch_auction_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_dutch_auction_order_by!],
+        "filter the rows returned"
+        where: obj_dutch_auction_bool_exp
+    ): [obj_dutch_auction!]!
+    "fetch data from the table: \"obj_dutch_auction\" using primary key columns"
+    obj_dutch_auction_by_pk(id: bigint!): obj_dutch_auction
+    "fetch data from the table: \"obj_english_auction\""
+    obj_english_auction(
+        "distinct select on columns"
+        distinct_on: [obj_english_auction_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_english_auction_order_by!],
+        "filter the rows returned"
+        where: obj_english_auction_bool_exp
+    ): [obj_english_auction!]!
+    "fetch data from the table: \"obj_english_auction\" using primary key columns"
+    obj_english_auction_by_pk(id: bigint!): obj_english_auction
+    "fetch data from the table: \"obj_english_bid\""
+    obj_english_bid(
+        "distinct select on columns"
+        distinct_on: [obj_english_bid_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_english_bid_order_by!],
+        "filter the rows returned"
+        where: obj_english_bid_bool_exp
+    ): [obj_english_bid!]!
+    "fetch data from the table: \"obj_english_bid\" using primary key columns"
+    obj_english_bid_by_pk(id: bigint!): obj_english_bid
+    "fetch data from the table: \"obj_fulfilled_ask\""
+    obj_fulfilled_ask(
+        "distinct select on columns"
+        distinct_on: [obj_fulfilled_ask_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_fulfilled_ask_order_by!],
+        "filter the rows returned"
+        where: obj_fulfilled_ask_bool_exp
+    ): [obj_fulfilled_ask!]!
+    "fetch data from the table: \"obj_fulfilled_ask\" using primary key columns"
+    obj_fulfilled_ask_by_pk(id: bigint!): obj_fulfilled_ask
+    "An array relationship"
+    sales_stat(
+        "distinct select on columns"
+        distinct_on: [sales_stat_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [sales_stat_order_by!],
+        "filter the rows returned"
+        where: sales_stat_bool_exp
+    ): [sales_stat!]!
+    "fetch data from the table: \"sales_stat\" using primary key columns"
+    sales_stat_by_pk(id: smallint!): sales_stat
+    "fetch data from the table: \"tag\""
+    tag(
+        "distinct select on columns"
+        distinct_on: [tag_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [tag_order_by!],
+        "filter the rows returned"
+        where: tag_bool_exp
+    ): [tag!]!
+    "fetch data from the table: \"tag\" using primary key columns"
+    tag_by_pk(id: bigint!): tag
+    "fetch data from the table: \"token\""
+    token(
+        "distinct select on columns"
+        distinct_on: [token_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [token_order_by!],
+        "filter the rows returned"
+        where: token_bool_exp
+    ): [token!]!
+    "fetch data from the table: \"token_attribute\""
+    token_attribute(
+        "distinct select on columns"
+        distinct_on: [token_attribute_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [token_attribute_order_by!],
+        "filter the rows returned"
+        where: token_attribute_bool_exp
+    ): [token_attribute!]!
+    "fetch data from the table: \"token_attribute\" using primary key columns"
+    token_attribute_by_pk(id: Int!): token_attribute
+    "fetch data from the table: \"token\" using primary key columns"
+    token_by_pk(pk_id: bigint!): token
+    "fetch data from the table: \"token_holder\""
+    token_holder(
+        "distinct select on columns"
+        distinct_on: [token_holder_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [token_holder_order_by!],
+        "filter the rows returned"
+        where: token_holder_bool_exp
+    ): [token_holder!]!
+    "fetch data from the table: \"token_holder\" using primary key columns"
+    token_holder_by_pk(id: Int!): token_holder
+    "fetch data from the table: \"token_tag\""
+    token_tag(
+        "distinct select on columns"
+        distinct_on: [token_tag_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [token_tag_order_by!],
+        "filter the rows returned"
+        where: token_tag_bool_exp
+    ): [token_tag!]!
+    "fetch data from the table: \"token_tag\" using primary key columns"
+    token_tag_by_pk(id: Int!): token_tag
+    "fetch data from the table: \"tzd_domain\""
+    tzd_domain(
+        "distinct select on columns"
+        distinct_on: [tzd_domain_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [tzd_domain_order_by!],
+        "filter the rows returned"
+        where: tzd_domain_bool_exp
+    ): [tzd_domain!]!
+    "fetch data from the table: \"tzd_domain\" using primary key columns"
+    tzd_domain_by_pk(id: String!): tzd_domain
+    "fetch data from the table: \"tzd_record\""
+    tzd_record(
+        "distinct select on columns"
+        distinct_on: [tzd_record_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [tzd_record_order_by!],
+        "filter the rows returned"
+        where: tzd_record_bool_exp
+    ): [tzd_record!]!
+    "fetch data from the table: \"tzd_record\" using primary key columns"
+    tzd_record_by_pk(id: String!): tzd_record
+    "fetch data from the table: \"tzd_tld\""
+    tzd_tld(
+        "distinct select on columns"
+        distinct_on: [tzd_tld_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [tzd_tld_order_by!],
+        "filter the rows returned"
+        where: tzd_tld_bool_exp
+    ): [tzd_tld!]!
+    "fetch data from the table: \"tzd_tld\" using primary key columns"
+    tzd_tld_by_pk(id: String!): tzd_tld
+}
+
+"columns and relationships of \"tag\""
+type tag {
+    id: bigint!
+    name: String!
+    "An array relationship"
+    tag_tokens(
+        "distinct select on columns"
+        distinct_on: [token_tag_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [token_tag_order_by!],
+        "filter the rows returned"
+        where: token_tag_bool_exp
+    ): [token_tag!]!
+}
+
+"columns and relationships of \"token\""
+type token {
+    artifact_uri: String!
+    "An array relationship"
+    asks(
+        "distinct select on columns"
+        distinct_on: [obj_ask_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_ask_order_by!],
+        "filter the rows returned"
+        where: obj_ask_bool_exp
+    ): [obj_ask!]!
+    "An array relationship"
+    bids(
+        "distinct select on columns"
+        distinct_on: [obj_bid_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_bid_order_by!],
+        "filter the rows returned"
+        where: obj_bid_bool_exp
+    ): [obj_bid!]!
+    "An object relationship"
+    creator: holder
+    creator_id: String
+    description: String!
+    display_uri: String!
+    "An array relationship"
+    dutch_auctions(
+        "distinct select on columns"
+        distinct_on: [obj_dutch_auction_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_dutch_auction_order_by!],
+        "filter the rows returned"
+        where: obj_dutch_auction_bool_exp
+    ): [obj_dutch_auction!]!
+    "An array relationship"
+    english_auctions(
+        "distinct select on columns"
+        distinct_on: [obj_english_auction_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_english_auction_order_by!],
+        "filter the rows returned"
+        where: obj_english_auction_bool_exp
+    ): [obj_english_auction!]!
+    "An array relationship"
+    events(
+        "distinct select on columns"
+        distinct_on: [event_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [event_order_by!],
+        "filter the rows returned"
+        where: event_bool_exp
+    ): [event!]!
+    extra(
+        "JSON select path"
+        path: String
+    ): jsonb!
+    "An object relationship"
+    fa2: fa2!
+    fa2_id: String!
+    flag: flag_type!
+    force_metadata_update: Boolean!
+    "An array relationship"
+    fulfilled_asks(
+        "distinct select on columns"
+        distinct_on: [obj_fulfilled_ask_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [obj_fulfilled_ask_order_by!],
+        "filter the rows returned"
+        where: obj_fulfilled_ask_bool_exp
+    ): [obj_fulfilled_ask!]!
+    highest_bid: bigint
+    id: String!
+    is_signed: Boolean!
+    last_listed: timestamptz
+    last_metadata_update: timestamptz
+    level: bigint!
+    lowest_ask: bigint
+    metadata: String!
+    mime: String!
+    pk_id: bigint!
+    royalties: smallint!
+    supply: bigint!
+    "An array relationship"
+    swaps(
+        "distinct select on columns"
+        distinct_on: [hen_swap_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_swap_order_by!],
+        "filter the rows returned"
+        where: hen_swap_bool_exp
+    ): [hen_swap!]!
+    thresh: bigint!
+    thumbnail_uri: String!
+    timestamp: timestamptz!
+    title: String!
+    "An array relationship"
+    token_attributes(
+        "distinct select on columns"
+        distinct_on: [token_attribute_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [token_attribute_order_by!],
+        "filter the rows returned"
+        where: token_attribute_bool_exp
+    ): [token_attribute!]!
+    "An array relationship"
+    token_holders(
+        "distinct select on columns"
+        distinct_on: [token_holder_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [token_holder_order_by!],
+        "filter the rows returned"
+        where: token_holder_bool_exp
+    ): [token_holder!]!
+    "An array relationship"
+    token_signatures(
+        "distinct select on columns"
+        distinct_on: [hen_split_signature_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_split_signature_order_by!],
+        "filter the rows returned"
+        where: hen_split_signature_bool_exp
+    ): [hen_split_signature!]!
+    "An array relationship"
+    token_tags(
+        "distinct select on columns"
+        distinct_on: [token_tag_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [token_tag_order_by!],
+        "filter the rows returned"
+        where: token_tag_bool_exp
+    ): [token_tag!]!
+    "An array relationship"
+    trades(
+        "distinct select on columns"
+        distinct_on: [hen_trade_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [hen_trade_order_by!],
+        "filter the rows returned"
+        where: hen_trade_bool_exp
+    ): [hen_trade!]!
+}
+
+"columns and relationships of \"token_attribute\""
+type token_attribute {
+    "An object relationship"
+    attribute: attribute!
+    attribute_id: bigint!
+    id: Int!
+    "An object relationship"
+    token: token!
+    token_id: bigint!
+}
+
+"columns and relationships of \"token_holder\""
+type token_holder {
+    "An object relationship"
+    holder: holder!
+    holder_id: String!
+    id: Int!
+    last_incremented: timestamptz
+    quantity: bigint!
+    "An object relationship"
+    token: token!
+    token_id: bigint!
+}
+
+"columns and relationships of \"token_tag\""
+type token_tag {
+    id: Int!
+    "An object relationship"
+    tag: tag!
+    tag_id: bigint!
+    "An object relationship"
+    token: token!
+    token_id: bigint!
+}
+
+"columns and relationships of \"tzd_domain\""
+type tzd_domain {
+    expiry: timestamptz
+    id: String!
+    owner: String
+    "An array relationship"
+    records(
+        "distinct select on columns"
+        distinct_on: [tzd_record_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [tzd_record_order_by!],
+        "filter the rows returned"
+        where: tzd_record_bool_exp
+    ): [tzd_record!]!
+    "An object relationship"
+    tld: tzd_tld!
+    tld_id: String!
+    token_id: bigint
+}
+
+"columns and relationships of \"tzd_record\""
+type tzd_record {
+    "An object relationship"
+    domain: tzd_domain!
+    domain_id: String!
+    id: String!
+    "An object relationship"
+    target: holder!
+    target_id: String!
+}
+
+"columns and relationships of \"tzd_tld\""
+type tzd_tld {
+    "An array relationship"
+    domains(
+        "distinct select on columns"
+        distinct_on: [tzd_domain_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [tzd_domain_order_by!],
+        "filter the rows returned"
+        where: tzd_domain_bool_exp
+    ): [tzd_domain!]!
+    id: String!
+    owner: String!
+}
+
+"select columns of table \"attribute\""
+enum attribute_select_column {
+    "column name"
+    count
+    "column name"
+    fa2_id
+    "column name"
+    id
+    "column name"
+    name
+    "column name"
+    type
+    "column name"
+    value
+}
+
+"select columns of table \"dipdup_contract\""
+enum dipdup_contract_select_column {
+    "column name"
+    address
+    "column name"
+    created_at
+    "column name"
+    name
+    "column name"
+    typename
+    "column name"
+    updated_at
+}
+
+"select columns of table \"dipdup_head\""
+enum dipdup_head_select_column {
+    "column name"
+    created_at
+    "column name"
+    hash
+    "column name"
+    level
+    "column name"
+    name
+    "column name"
+    timestamp
+    "column name"
+    updated_at
+}
+
+"select columns of table \"dipdup_index\""
+enum dipdup_index_select_column {
+    "column name"
+    config_hash
+    "column name"
+    created_at
+    "column name"
+    level
+    "column name"
+    name
+    "column name"
+    status
+    "column name"
+    template
+    "column name"
+    template_values
+    "column name"
+    type
+    "column name"
+    updated_at
+}
+
+"select columns of table \"dipdup_schema\""
+enum dipdup_schema_select_column {
+    "column name"
+    created_at
+    "column name"
+    hash
+    "column name"
+    name
+    "column name"
+    reindex
+    "column name"
+    updated_at
+}
+
+"select columns of table \"event\""
+enum event_select_column {
+    "column name"
+    amount
+    "column name"
+    creator_id
+    "column name"
+    event_type
+    "column name"
+    fa2_id
+    "column name"
+    id
+    "column name"
+    ob_contract
+    "column name"
+    price
+    "column name"
+    recipient_id
+    "column name"
+    timestamp
+    "column name"
+    token_id
+}
+
+"select columns of table \"fa2_collaborators\""
+enum fa2_collaborators_select_column {
+    "column name"
+    collaborator_id
+    "column name"
+    fa2_id
+    "column name"
+    id
+    "column name"
+    signed
+}
+
+"select columns of table \"fa2\""
+enum fa2_select_column {
+    "column name"
+    active_auctions
+    "column name"
+    active_listing
+    "column name"
+    category
+    "column name"
+    collection_id
+    "column name"
+    collection_type
+    "column name"
+    contract
+    "column name"
+    creator_id
+    "column name"
+    description
+    "column name"
+    floor_price
+    "column name"
+    force_metadata_update
+    "column name"
+    items
+    "column name"
+    last_metadata_update
+    "column name"
+    level
+    "column name"
+    live
+    "column name"
+    logo
+    "column name"
+    metadata
+    "column name"
+    name
+    "column name"
+    owners
+    "column name"
+    path
+    "column name"
+    short_name
+    "column name"
+    timestamp
+    "column name"
+    token_link
+    "column name"
+    twitter
+    "column name"
+    type
+    "column name"
+    volume_24h
+    "column name"
+    volume_total
+    "column name"
+    website
+}
+
+"select columns of table \"hen_shareholder\""
+enum hen_shareholder_select_column {
+    "column name"
+    holder_id
+    "column name"
+    holder_type
+    "column name"
+    id
+    "column name"
+    shares
+    "column name"
+    split_contract_id
+}
+
+"select columns of table \"hen_split_contract\""
+enum hen_split_contract_select_column {
+    "column name"
+    administrator
+    "column name"
+    contract_id
+    "column name"
+    id
+    "column name"
+    total_shares
+}
+
+"select columns of table \"hen_split_signature\""
+enum hen_split_signature_select_column {
+    "column name"
+    holder_id
+    "column name"
+    id
+    "column name"
+    token_id
+}
+
+"select columns of table \"hen_swap\""
+enum hen_swap_select_column {
+    "column name"
+    amount
+    "column name"
+    amount_left
+    "column name"
+    contract_version
+    "column name"
+    creator_id
+    "column name"
+    id
+    "column name"
+    is_valid
+    "column name"
+    level
+    "column name"
+    price
+    "column name"
+    royalties
+    "column name"
+    status
+    "column name"
+    timestamp
+    "column name"
+    token_id
+}
+
+"select columns of table \"hen_trade\""
+enum hen_trade_select_column {
+    "column name"
+    amount
+    "column name"
+    buyer_id
+    "column name"
+    id
+    "column name"
+    level
+    "column name"
+    seller_id
+    "column name"
+    swap_id
+    "column name"
+    timestamp
+    "column name"
+    token_id
+}
+
+"select columns of table \"holder\""
+enum holder_select_column {
+    "column name"
+    address
+    "column name"
+    alias
+    "column name"
+    description
+    "column name"
+    discord
+    "column name"
+    email
+    "column name"
+    facebook
+    "column name"
+    flag
+    "column name"
+    github
+    "column name"
+    gitlab
+    "column name"
+    holder_type
+    "column name"
+    instagram
+    "column name"
+    last_metadata_update
+    "column name"
+    medium
+    "column name"
+    reddit
+    "column name"
+    site
+    "column name"
+    slack
+    "column name"
+    support
+    "column name"
+    telegram
+    "column name"
+    twitter
+    "column name"
+    tzdomain
+}
+
+"select columns of table \"obj_ask\""
+enum obj_ask_select_column {
+    "column name"
+    amount
+    "column name"
+    amount_left
+    "column name"
+    artist_id
+    "column name"
+    creator_id
+    "column name"
+    fa2_id
+    "column name"
+    id
+    "column name"
+    level
+    "column name"
+    price
+    "column name"
+    royalties
+    "column name"
+    status
+    "column name"
+    timestamp
+    "column name"
+    token_id
+    "column name"
+    update_level
+    "column name"
+    update_timestamp
+}
+
+"select columns of table \"obj_bid\""
+enum obj_bid_select_column {
+    "column name"
+    artist_id
+    "column name"
+    creator_id
+    "column name"
+    fa2_id
+    "column name"
+    id
+    "column name"
+    level
+    "column name"
+    price
+    "column name"
+    royalties
+    "column name"
+    seller_id
+    "column name"
+    status
+    "column name"
+    timestamp
+    "column name"
+    token_id
+    "column name"
+    update_level
+    "column name"
+    update_timestamp
+}
+
+"select columns of table \"obj_dutch_auction\""
+enum obj_dutch_auction_select_column {
+    "column name"
+    artist_id
+    "column name"
+    buy_price
+    "column name"
+    buyer_id
+    "column name"
+    contract_version
+    "column name"
+    creator_id
+    "column name"
+    end_price
+    "column name"
+    end_time
+    "column name"
+    fa2_id
+    "column name"
+    hash
+    "column name"
+    id
+    "column name"
+    level
+    "column name"
+    royalties
+    "column name"
+    start_price
+    "column name"
+    start_time
+    "column name"
+    status
+    "column name"
+    timestamp
+    "column name"
+    token_id
+    "column name"
+    update_level
+    "column name"
+    update_timestamp
+}
+
+"select columns of table \"obj_english_auction\""
+enum obj_english_auction_select_column {
+    "column name"
+    artist_id
+    "column name"
+    contract_version
+    "column name"
+    creator_id
+    "column name"
+    end_time
+    "column name"
+    extension_time
+    "column name"
+    fa2_id
+    "column name"
+    hash
+    "column name"
+    highest_bid
+    "column name"
+    highest_bidder_id
+    "column name"
+    id
+    "column name"
+    level
+    "column name"
+    price_increment
+    "column name"
+    reserve
+    "column name"
+    royalties
+    "column name"
+    start_time
+    "column name"
+    status
+    "column name"
+    timestamp
+    "column name"
+    token_id
+    "column name"
+    update_level
+    "column name"
+    update_timestamp
+}
+
+"select columns of table \"obj_english_bid\""
+enum obj_english_bid_select_column {
+    "column name"
+    amount
+    "column name"
+    auction_id
+    "column name"
+    bidder_id
+    "column name"
+    id
+    "column name"
+    level
+    "column name"
+    timestamp
+}
+
+"select columns of table \"obj_fulfilled_ask\""
+enum obj_fulfilled_ask_select_column {
+    "column name"
+    amount
+    "column name"
+    ask_id
+    "column name"
+    buyer_id
+    "column name"
+    id
+    "column name"
+    level
+    "column name"
+    price
+    "column name"
+    seller_id
+    "column name"
+    timestamp
+    "column name"
+    token_id
+}
+
+"column ordering options"
+enum order_by {
+    "in ascending order, nulls last"
+    asc
+    "in ascending order, nulls first"
+    asc_nulls_first
+    "in ascending order, nulls last"
+    asc_nulls_last
+    "in descending order, nulls first"
+    desc
+    "in descending order, nulls first"
+    desc_nulls_first
+    "in descending order, nulls last"
+    desc_nulls_last
+}
+
+"select columns of table \"sales_stat\""
+enum sales_stat_select_column {
+    "column name"
+    id
+    "column name"
+    interval_days
+    "column name"
+    rank
+    "column name"
+    subject_id
+    "column name"
+    type
+    "column name"
+    volume
+}
+
+"select columns of table \"tag\""
+enum tag_select_column {
+    "column name"
+    id
+    "column name"
+    name
+}
+
+"select columns of table \"token_attribute\""
+enum token_attribute_select_column {
+    "column name"
+    attribute_id
+    "column name"
+    id
+    "column name"
+    token_id
+}
+
+"select columns of table \"token_holder\""
+enum token_holder_select_column {
+    "column name"
+    holder_id
+    "column name"
+    id
+    "column name"
+    last_incremented
+    "column name"
+    quantity
+    "column name"
+    token_id
+}
+
+"select columns of table \"token\""
+enum token_select_column {
+    "column name"
+    artifact_uri
+    "column name"
+    creator_id
+    "column name"
+    description
+    "column name"
+    display_uri
+    "column name"
+    extra
+    "column name"
+    fa2_id
+    "column name"
+    flag
+    "column name"
+    force_metadata_update
+    "column name"
+    highest_bid
+    "column name"
+    id
+    "column name"
+    is_signed
+    "column name"
+    last_listed
+    "column name"
+    last_metadata_update
+    "column name"
+    level
+    "column name"
+    lowest_ask
+    "column name"
+    metadata
+    "column name"
+    mime
+    "column name"
+    pk_id
+    "column name"
+    royalties
+    "column name"
+    supply
+    "column name"
+    thresh
+    "column name"
+    thumbnail_uri
+    "column name"
+    timestamp
+    "column name"
+    title
+}
+
+"select columns of table \"token_tag\""
+enum token_tag_select_column {
+    "column name"
+    id
+    "column name"
+    tag_id
+    "column name"
+    token_id
+}
+
+"select columns of table \"tzd_domain\""
+enum tzd_domain_select_column {
+    "column name"
+    expiry
+    "column name"
+    id
+    "column name"
+    owner
+    "column name"
+    tld_id
+    "column name"
+    token_id
+}
+
+"select columns of table \"tzd_record\""
+enum tzd_record_select_column {
+    "column name"
+    domain_id
+    "column name"
+    id
+    "column name"
+    target_id
+}
+
+"select columns of table \"tzd_tld\""
+enum tzd_tld_select_column {
+    "column name"
+    id
+    "column name"
+    owner
+}
+
+"Boolean expression to compare columns of type \"Boolean\". All fields are combined with logical 'AND'."
+input Boolean_comparison_exp {
+    _eq: Boolean
+    _gt: Boolean
+    _gte: Boolean
+    _in: [Boolean!]
+    _is_null: Boolean
+    _lt: Boolean
+    _lte: Boolean
+    _neq: Boolean
+    _nin: [Boolean!]
+}
+
+"Boolean expression to compare columns of type \"Int\". All fields are combined with logical 'AND'."
+input Int_comparison_exp {
+    _eq: Int
+    _gt: Int
+    _gte: Int
+    _in: [Int!]
+    _is_null: Boolean
+    _lt: Int
+    _lte: Int
+    _neq: Int
+    _nin: [Int!]
+}
+
+"Boolean expression to compare columns of type \"String\". All fields are combined with logical 'AND'."
+input String_comparison_exp {
+    _eq: String
+    _gt: String
+    _gte: String
+    "does the column match the given case-insensitive pattern"
+    _ilike: String
+    _in: [String!]
+    "does the column match the given POSIX regular expression, case insensitive"
+    _iregex: String
+    _is_null: Boolean
+    "does the column match the given pattern"
+    _like: String
+    _lt: String
+    _lte: String
+    _neq: String
+    "does the column NOT match the given case-insensitive pattern"
+    _nilike: String
+    _nin: [String!]
+    "does the column NOT match the given POSIX regular expression, case insensitive"
+    _niregex: String
+    "does the column NOT match the given pattern"
+    _nlike: String
+    "does the column NOT match the given POSIX regular expression, case sensitive"
+    _nregex: String
+    "does the column NOT match the given SQL regular expression"
+    _nsimilar: String
+    "does the column match the given POSIX regular expression, case sensitive"
+    _regex: String
+    "does the column match the given SQL regular expression"
+    _similar: String
+}
+
+"order by aggregate values of table \"attribute\""
+input attribute_aggregate_order_by {
+    avg: attribute_avg_order_by
+    count: order_by
+    max: attribute_max_order_by
+    min: attribute_min_order_by
+    stddev: attribute_stddev_order_by
+    stddev_pop: attribute_stddev_pop_order_by
+    stddev_samp: attribute_stddev_samp_order_by
+    sum: attribute_sum_order_by
+    var_pop: attribute_var_pop_order_by
+    var_samp: attribute_var_samp_order_by
+    variance: attribute_variance_order_by
+}
+
+"order by avg() on columns of table \"attribute\""
+input attribute_avg_order_by {
+    count: order_by
+    id: order_by
+}
+
+"Boolean expression to filter rows from the table \"attribute\". All fields are combined with a logical 'AND'."
+input attribute_bool_exp {
+    _and: [attribute_bool_exp!]
+    _not: attribute_bool_exp
+    _or: [attribute_bool_exp!]
+    attribute_tokens: token_attribute_bool_exp
+    count: bigint_comparison_exp
+    fa2: fa2_bool_exp
+    fa2_id: String_comparison_exp
+    id: bigint_comparison_exp
+    name: String_comparison_exp
+    type: String_comparison_exp
+    value: String_comparison_exp
+}
+
+"order by max() on columns of table \"attribute\""
+input attribute_max_order_by {
+    count: order_by
+    fa2_id: order_by
+    id: order_by
+    name: order_by
+    type: order_by
+    value: order_by
+}
+
+"order by min() on columns of table \"attribute\""
+input attribute_min_order_by {
+    count: order_by
+    fa2_id: order_by
+    id: order_by
+    name: order_by
+    type: order_by
+    value: order_by
+}
+
+"Ordering options when selecting data from \"attribute\"."
+input attribute_order_by {
+    attribute_tokens_aggregate: token_attribute_aggregate_order_by
+    count: order_by
+    fa2: fa2_order_by
+    fa2_id: order_by
+    id: order_by
+    name: order_by
+    type: order_by
+    value: order_by
+}
+
+"order by stddev() on columns of table \"attribute\""
+input attribute_stddev_order_by {
+    count: order_by
+    id: order_by
+}
+
+"order by stddev_pop() on columns of table \"attribute\""
+input attribute_stddev_pop_order_by {
+    count: order_by
+    id: order_by
+}
+
+"order by stddev_samp() on columns of table \"attribute\""
+input attribute_stddev_samp_order_by {
+    count: order_by
+    id: order_by
+}
+
+"order by sum() on columns of table \"attribute\""
+input attribute_sum_order_by {
+    count: order_by
+    id: order_by
+}
+
+"order by var_pop() on columns of table \"attribute\""
+input attribute_var_pop_order_by {
+    count: order_by
+    id: order_by
+}
+
+"order by var_samp() on columns of table \"attribute\""
+input attribute_var_samp_order_by {
+    count: order_by
+    id: order_by
+}
+
+"order by variance() on columns of table \"attribute\""
+input attribute_variance_order_by {
+    count: order_by
+    id: order_by
+}
+
+"Boolean expression to compare columns of type \"auction_status_type\". All fields are combined with logical 'AND'."
+input auction_status_type_comparison_exp {
+    _eq: auction_status_type
+    _gt: auction_status_type
+    _gte: auction_status_type
+    _in: [auction_status_type!]
+    _is_null: Boolean
+    _lt: auction_status_type
+    _lte: auction_status_type
+    _neq: auction_status_type
+    _nin: [auction_status_type!]
+}
+
+"Boolean expression to compare columns of type \"bigint\". All fields are combined with logical 'AND'."
+input bigint_comparison_exp {
+    _eq: bigint
+    _gt: bigint
+    _gte: bigint
+    _in: [bigint!]
+    _is_null: Boolean
+    _lt: bigint
+    _lte: bigint
+    _neq: bigint
+    _nin: [bigint!]
+}
+
+"Boolean expression to compare columns of type \"collection_type\". All fields are combined with logical 'AND'."
+input collection_type_comparison_exp {
+    _eq: collection_type
+    _gt: collection_type
+    _gte: collection_type
+    _in: [collection_type!]
+    _is_null: Boolean
+    _lt: collection_type
+    _lte: collection_type
+    _neq: collection_type
+    _nin: [collection_type!]
+}
+
+"Boolean expression to filter rows from the table \"dipdup_contract\". All fields are combined with a logical 'AND'."
+input dipdup_contract_bool_exp {
+    _and: [dipdup_contract_bool_exp!]
+    _not: dipdup_contract_bool_exp
+    _or: [dipdup_contract_bool_exp!]
+    address: String_comparison_exp
+    created_at: timestamptz_comparison_exp
+    name: String_comparison_exp
+    typename: String_comparison_exp
+    updated_at: timestamptz_comparison_exp
+}
+
+"Ordering options when selecting data from \"dipdup_contract\"."
+input dipdup_contract_order_by {
+    address: order_by
+    created_at: order_by
+    name: order_by
+    typename: order_by
+    updated_at: order_by
+}
+
+"Boolean expression to filter rows from the table \"dipdup_head\". All fields are combined with a logical 'AND'."
+input dipdup_head_bool_exp {
+    _and: [dipdup_head_bool_exp!]
+    _not: dipdup_head_bool_exp
+    _or: [dipdup_head_bool_exp!]
+    created_at: timestamptz_comparison_exp
+    hash: String_comparison_exp
+    level: Int_comparison_exp
+    name: String_comparison_exp
+    timestamp: timestamptz_comparison_exp
+    updated_at: timestamptz_comparison_exp
+}
+
+"Ordering options when selecting data from \"dipdup_head\"."
+input dipdup_head_order_by {
+    created_at: order_by
+    hash: order_by
+    level: order_by
+    name: order_by
+    timestamp: order_by
+    updated_at: order_by
+}
+
+"Boolean expression to filter rows from the table \"dipdup_index\". All fields are combined with a logical 'AND'."
+input dipdup_index_bool_exp {
+    _and: [dipdup_index_bool_exp!]
+    _not: dipdup_index_bool_exp
+    _or: [dipdup_index_bool_exp!]
+    config_hash: String_comparison_exp
+    created_at: timestamptz_comparison_exp
+    level: Int_comparison_exp
+    name: String_comparison_exp
+    status: String_comparison_exp
+    template: String_comparison_exp
+    template_values: jsonb_comparison_exp
+    type: String_comparison_exp
+    updated_at: timestamptz_comparison_exp
+}
+
+"Ordering options when selecting data from \"dipdup_index\"."
+input dipdup_index_order_by {
+    config_hash: order_by
+    created_at: order_by
+    level: order_by
+    name: order_by
+    status: order_by
+    template: order_by
+    template_values: order_by
+    type: order_by
+    updated_at: order_by
+}
+
+"Boolean expression to filter rows from the table \"dipdup_schema\". All fields are combined with a logical 'AND'."
+input dipdup_schema_bool_exp {
+    _and: [dipdup_schema_bool_exp!]
+    _not: dipdup_schema_bool_exp
+    _or: [dipdup_schema_bool_exp!]
+    created_at: timestamptz_comparison_exp
+    hash: String_comparison_exp
+    name: String_comparison_exp
+    reindex: String_comparison_exp
+    updated_at: timestamptz_comparison_exp
+}
+
+"Ordering options when selecting data from \"dipdup_schema\"."
+input dipdup_schema_order_by {
+    created_at: order_by
+    hash: order_by
+    name: order_by
+    reindex: order_by
+    updated_at: order_by
+}
+
+"order by aggregate values of table \"event\""
+input event_aggregate_order_by {
+    avg: event_avg_order_by
+    count: order_by
+    max: event_max_order_by
+    min: event_min_order_by
+    stddev: event_stddev_order_by
+    stddev_pop: event_stddev_pop_order_by
+    stddev_samp: event_stddev_samp_order_by
+    sum: event_sum_order_by
+    var_pop: event_var_pop_order_by
+    var_samp: event_var_samp_order_by
+    variance: event_variance_order_by
+}
+
+"order by avg() on columns of table \"event\""
+input event_avg_order_by {
+    amount: order_by
+    id: order_by
+    price: order_by
+    token_id: order_by
+}
+
+"Boolean expression to filter rows from the table \"event\". All fields are combined with a logical 'AND'."
+input event_bool_exp {
+    _and: [event_bool_exp!]
+    _not: event_bool_exp
+    _or: [event_bool_exp!]
+    amount: bigint_comparison_exp
+    creator: holder_bool_exp
+    creator_id: String_comparison_exp
+    event_type: event_type_comparison_exp
+    fa2: fa2_bool_exp
+    fa2_id: String_comparison_exp
+    id: bigint_comparison_exp
+    ob_contract: Boolean_comparison_exp
+    price: bigint_comparison_exp
+    recipient: holder_bool_exp
+    recipient_id: String_comparison_exp
+    timestamp: timestamptz_comparison_exp
+    token: token_bool_exp
+    token_id: bigint_comparison_exp
+}
+
+"order by max() on columns of table \"event\""
+input event_max_order_by {
+    amount: order_by
+    creator_id: order_by
+    fa2_id: order_by
+    id: order_by
+    price: order_by
+    recipient_id: order_by
+    timestamp: order_by
+    token_id: order_by
+}
+
+"order by min() on columns of table \"event\""
+input event_min_order_by {
+    amount: order_by
+    creator_id: order_by
+    fa2_id: order_by
+    id: order_by
+    price: order_by
+    recipient_id: order_by
+    timestamp: order_by
+    token_id: order_by
+}
+
+"Ordering options when selecting data from \"event\"."
+input event_order_by {
+    amount: order_by
+    creator: holder_order_by
+    creator_id: order_by
+    event_type: order_by
+    fa2: fa2_order_by
+    fa2_id: order_by
+    id: order_by
+    ob_contract: order_by
+    price: order_by
+    recipient: holder_order_by
+    recipient_id: order_by
+    timestamp: order_by
+    token: token_order_by
+    token_id: order_by
+}
+
+"order by stddev() on columns of table \"event\""
+input event_stddev_order_by {
+    amount: order_by
+    id: order_by
+    price: order_by
+    token_id: order_by
+}
+
+"order by stddev_pop() on columns of table \"event\""
+input event_stddev_pop_order_by {
+    amount: order_by
+    id: order_by
+    price: order_by
+    token_id: order_by
+}
+
+"order by stddev_samp() on columns of table \"event\""
+input event_stddev_samp_order_by {
+    amount: order_by
+    id: order_by
+    price: order_by
+    token_id: order_by
+}
+
+"order by sum() on columns of table \"event\""
+input event_sum_order_by {
+    amount: order_by
+    id: order_by
+    price: order_by
+    token_id: order_by
+}
+
+"Boolean expression to compare columns of type \"event_type\". All fields are combined with logical 'AND'."
+input event_type_comparison_exp {
+    _eq: event_type
+    _gt: event_type
+    _gte: event_type
+    _in: [event_type!]
+    _is_null: Boolean
+    _lt: event_type
+    _lte: event_type
+    _neq: event_type
+    _nin: [event_type!]
+}
+
+"order by var_pop() on columns of table \"event\""
+input event_var_pop_order_by {
+    amount: order_by
+    id: order_by
+    price: order_by
+    token_id: order_by
+}
+
+"order by var_samp() on columns of table \"event\""
+input event_var_samp_order_by {
+    amount: order_by
+    id: order_by
+    price: order_by
+    token_id: order_by
+}
+
+"order by variance() on columns of table \"event\""
+input event_variance_order_by {
+    amount: order_by
+    id: order_by
+    price: order_by
+    token_id: order_by
+}
+
+"order by aggregate values of table \"fa2\""
+input fa2_aggregate_order_by {
+    avg: fa2_avg_order_by
+    count: order_by
+    max: fa2_max_order_by
+    min: fa2_min_order_by
+    stddev: fa2_stddev_order_by
+    stddev_pop: fa2_stddev_pop_order_by
+    stddev_samp: fa2_stddev_samp_order_by
+    sum: fa2_sum_order_by
+    var_pop: fa2_var_pop_order_by
+    var_samp: fa2_var_samp_order_by
+    variance: fa2_variance_order_by
+}
+
+"order by avg() on columns of table \"fa2\""
+input fa2_avg_order_by {
+    active_auctions: order_by
+    active_listing: order_by
+    collection_id: order_by
+    floor_price: order_by
+    items: order_by
+    level: order_by
+    owners: order_by
+    volume_24h: order_by
+    volume_total: order_by
+}
+
+"Boolean expression to filter rows from the table \"fa2\". All fields are combined with a logical 'AND'."
+input fa2_bool_exp {
+    _and: [fa2_bool_exp!]
+    _not: fa2_bool_exp
+    _or: [fa2_bool_exp!]
+    active_auctions: bigint_comparison_exp
+    active_listing: bigint_comparison_exp
+    asks: obj_ask_bool_exp
+    attributes: attribute_bool_exp
+    bids: obj_bid_bool_exp
+    category: String_comparison_exp
+    collaborators: fa2_collaborators_bool_exp
+    collection_id: bigint_comparison_exp
+    collection_type: collection_type_comparison_exp
+    contract: String_comparison_exp
+    creator: holder_bool_exp
+    creator_id: String_comparison_exp
+    description: String_comparison_exp
+    dutch_auctions: obj_dutch_auction_bool_exp
+    english_auctions: obj_english_auction_bool_exp
+    events: event_bool_exp
+    floor_price: bigint_comparison_exp
+    force_metadata_update: Boolean_comparison_exp
+    items: bigint_comparison_exp
+    last_metadata_update: timestamptz_comparison_exp
+    level: bigint_comparison_exp
+    live: Boolean_comparison_exp
+    logo: String_comparison_exp
+    metadata: String_comparison_exp
+    name: String_comparison_exp
+    owners: bigint_comparison_exp
+    path: String_comparison_exp
+    short_name: String_comparison_exp
+    timestamp: timestamptz_comparison_exp
+    token_link: String_comparison_exp
+    tokens: token_bool_exp
+    twitter: String_comparison_exp
+    type: String_comparison_exp
+    volume_24h: bigint_comparison_exp
+    volume_total: bigint_comparison_exp
+    website: String_comparison_exp
+}
+
+"order by aggregate values of table \"fa2_collaborators\""
+input fa2_collaborators_aggregate_order_by {
+    avg: fa2_collaborators_avg_order_by
+    count: order_by
+    max: fa2_collaborators_max_order_by
+    min: fa2_collaborators_min_order_by
+    stddev: fa2_collaborators_stddev_order_by
+    stddev_pop: fa2_collaborators_stddev_pop_order_by
+    stddev_samp: fa2_collaborators_stddev_samp_order_by
+    sum: fa2_collaborators_sum_order_by
+    var_pop: fa2_collaborators_var_pop_order_by
+    var_samp: fa2_collaborators_var_samp_order_by
+    variance: fa2_collaborators_variance_order_by
+}
+
+"order by avg() on columns of table \"fa2_collaborators\""
+input fa2_collaborators_avg_order_by {
+    id: order_by
+}
+
+"Boolean expression to filter rows from the table \"fa2_collaborators\". All fields are combined with a logical 'AND'."
+input fa2_collaborators_bool_exp {
+    _and: [fa2_collaborators_bool_exp!]
+    _not: fa2_collaborators_bool_exp
+    _or: [fa2_collaborators_bool_exp!]
+    collaborator: holder_bool_exp
+    collaborator_id: String_comparison_exp
+    fa2: fa2_bool_exp
+    fa2_id: String_comparison_exp
+    id: Int_comparison_exp
+    signed: Boolean_comparison_exp
+}
+
+"order by max() on columns of table \"fa2_collaborators\""
+input fa2_collaborators_max_order_by {
+    collaborator_id: order_by
+    fa2_id: order_by
+    id: order_by
+}
+
+"order by min() on columns of table \"fa2_collaborators\""
+input fa2_collaborators_min_order_by {
+    collaborator_id: order_by
+    fa2_id: order_by
+    id: order_by
+}
+
+"Ordering options when selecting data from \"fa2_collaborators\"."
+input fa2_collaborators_order_by {
+    collaborator: holder_order_by
+    collaborator_id: order_by
+    fa2: fa2_order_by
+    fa2_id: order_by
+    id: order_by
+    signed: order_by
+}
+
+"order by stddev() on columns of table \"fa2_collaborators\""
+input fa2_collaborators_stddev_order_by {
+    id: order_by
+}
+
+"order by stddev_pop() on columns of table \"fa2_collaborators\""
+input fa2_collaborators_stddev_pop_order_by {
+    id: order_by
+}
+
+"order by stddev_samp() on columns of table \"fa2_collaborators\""
+input fa2_collaborators_stddev_samp_order_by {
+    id: order_by
+}
+
+"order by sum() on columns of table \"fa2_collaborators\""
+input fa2_collaborators_sum_order_by {
+    id: order_by
+}
+
+"order by var_pop() on columns of table \"fa2_collaborators\""
+input fa2_collaborators_var_pop_order_by {
+    id: order_by
+}
+
+"order by var_samp() on columns of table \"fa2_collaborators\""
+input fa2_collaborators_var_samp_order_by {
+    id: order_by
+}
+
+"order by variance() on columns of table \"fa2_collaborators\""
+input fa2_collaborators_variance_order_by {
+    id: order_by
+}
+
+"order by max() on columns of table \"fa2\""
+input fa2_max_order_by {
+    active_auctions: order_by
+    active_listing: order_by
+    category: order_by
+    collection_id: order_by
+    contract: order_by
+    creator_id: order_by
+    description: order_by
+    floor_price: order_by
+    items: order_by
+    last_metadata_update: order_by
+    level: order_by
+    logo: order_by
+    metadata: order_by
+    name: order_by
+    owners: order_by
+    path: order_by
+    short_name: order_by
+    timestamp: order_by
+    token_link: order_by
+    twitter: order_by
+    type: order_by
+    volume_24h: order_by
+    volume_total: order_by
+    website: order_by
+}
+
+"order by min() on columns of table \"fa2\""
+input fa2_min_order_by {
+    active_auctions: order_by
+    active_listing: order_by
+    category: order_by
+    collection_id: order_by
+    contract: order_by
+    creator_id: order_by
+    description: order_by
+    floor_price: order_by
+    items: order_by
+    last_metadata_update: order_by
+    level: order_by
+    logo: order_by
+    metadata: order_by
+    name: order_by
+    owners: order_by
+    path: order_by
+    short_name: order_by
+    timestamp: order_by
+    token_link: order_by
+    twitter: order_by
+    type: order_by
+    volume_24h: order_by
+    volume_total: order_by
+    website: order_by
+}
+
+"Ordering options when selecting data from \"fa2\"."
+input fa2_order_by {
+    active_auctions: order_by
+    active_listing: order_by
+    asks_aggregate: obj_ask_aggregate_order_by
+    attributes_aggregate: attribute_aggregate_order_by
+    bids_aggregate: obj_bid_aggregate_order_by
+    category: order_by
+    collaborators_aggregate: fa2_collaborators_aggregate_order_by
+    collection_id: order_by
+    collection_type: order_by
+    contract: order_by
+    creator: holder_order_by
+    creator_id: order_by
+    description: order_by
+    dutch_auctions_aggregate: obj_dutch_auction_aggregate_order_by
+    english_auctions_aggregate: obj_english_auction_aggregate_order_by
+    events_aggregate: event_aggregate_order_by
+    floor_price: order_by
+    force_metadata_update: order_by
+    items: order_by
+    last_metadata_update: order_by
+    level: order_by
+    live: order_by
+    logo: order_by
+    metadata: order_by
+    name: order_by
+    owners: order_by
+    path: order_by
+    short_name: order_by
+    timestamp: order_by
+    token_link: order_by
+    tokens_aggregate: token_aggregate_order_by
+    twitter: order_by
+    type: order_by
+    volume_24h: order_by
+    volume_total: order_by
+    website: order_by
+}
+
+"order by stddev() on columns of table \"fa2\""
+input fa2_stddev_order_by {
+    active_auctions: order_by
+    active_listing: order_by
+    collection_id: order_by
+    floor_price: order_by
+    items: order_by
+    level: order_by
+    owners: order_by
+    volume_24h: order_by
+    volume_total: order_by
+}
+
+"order by stddev_pop() on columns of table \"fa2\""
+input fa2_stddev_pop_order_by {
+    active_auctions: order_by
+    active_listing: order_by
+    collection_id: order_by
+    floor_price: order_by
+    items: order_by
+    level: order_by
+    owners: order_by
+    volume_24h: order_by
+    volume_total: order_by
+}
+
+"order by stddev_samp() on columns of table \"fa2\""
+input fa2_stddev_samp_order_by {
+    active_auctions: order_by
+    active_listing: order_by
+    collection_id: order_by
+    floor_price: order_by
+    items: order_by
+    level: order_by
+    owners: order_by
+    volume_24h: order_by
+    volume_total: order_by
+}
+
+"order by sum() on columns of table \"fa2\""
+input fa2_sum_order_by {
+    active_auctions: order_by
+    active_listing: order_by
+    collection_id: order_by
+    floor_price: order_by
+    items: order_by
+    level: order_by
+    owners: order_by
+    volume_24h: order_by
+    volume_total: order_by
+}
+
+"order by var_pop() on columns of table \"fa2\""
+input fa2_var_pop_order_by {
+    active_auctions: order_by
+    active_listing: order_by
+    collection_id: order_by
+    floor_price: order_by
+    items: order_by
+    level: order_by
+    owners: order_by
+    volume_24h: order_by
+    volume_total: order_by
+}
+
+"order by var_samp() on columns of table \"fa2\""
+input fa2_var_samp_order_by {
+    active_auctions: order_by
+    active_listing: order_by
+    collection_id: order_by
+    floor_price: order_by
+    items: order_by
+    level: order_by
+    owners: order_by
+    volume_24h: order_by
+    volume_total: order_by
+}
+
+"order by variance() on columns of table \"fa2\""
+input fa2_variance_order_by {
+    active_auctions: order_by
+    active_listing: order_by
+    collection_id: order_by
+    floor_price: order_by
+    items: order_by
+    level: order_by
+    owners: order_by
+    volume_24h: order_by
+    volume_total: order_by
+}
+
+"Boolean expression to compare columns of type \"flag_type\". All fields are combined with logical 'AND'."
+input flag_type_comparison_exp {
+    _eq: flag_type
+    _gt: flag_type
+    _gte: flag_type
+    _in: [flag_type!]
+    _is_null: Boolean
+    _lt: flag_type
+    _lte: flag_type
+    _neq: flag_type
+    _nin: [flag_type!]
+}
+
+"order by aggregate values of table \"hen_shareholder\""
+input hen_shareholder_aggregate_order_by {
+    avg: hen_shareholder_avg_order_by
+    count: order_by
+    max: hen_shareholder_max_order_by
+    min: hen_shareholder_min_order_by
+    stddev: hen_shareholder_stddev_order_by
+    stddev_pop: hen_shareholder_stddev_pop_order_by
+    stddev_samp: hen_shareholder_stddev_samp_order_by
+    sum: hen_shareholder_sum_order_by
+    var_pop: hen_shareholder_var_pop_order_by
+    var_samp: hen_shareholder_var_samp_order_by
+    variance: hen_shareholder_variance_order_by
+}
+
+"order by avg() on columns of table \"hen_shareholder\""
+input hen_shareholder_avg_order_by {
+    id: order_by
+    shares: order_by
+    split_contract_id: order_by
+}
+
+"Boolean expression to filter rows from the table \"hen_shareholder\". All fields are combined with a logical 'AND'."
+input hen_shareholder_bool_exp {
+    _and: [hen_shareholder_bool_exp!]
+    _not: hen_shareholder_bool_exp
+    _or: [hen_shareholder_bool_exp!]
+    holder: holder_bool_exp
+    holder_id: String_comparison_exp
+    holder_type: shareholder_status_type_comparison_exp
+    id: Int_comparison_exp
+    shares: bigint_comparison_exp
+    split_contract: hen_split_contract_bool_exp
+    split_contract_id: Int_comparison_exp
+}
+
+"order by max() on columns of table \"hen_shareholder\""
+input hen_shareholder_max_order_by {
+    holder_id: order_by
+    id: order_by
+    shares: order_by
+    split_contract_id: order_by
+}
+
+"order by min() on columns of table \"hen_shareholder\""
+input hen_shareholder_min_order_by {
+    holder_id: order_by
+    id: order_by
+    shares: order_by
+    split_contract_id: order_by
+}
+
+"Ordering options when selecting data from \"hen_shareholder\"."
+input hen_shareholder_order_by {
+    holder: holder_order_by
+    holder_id: order_by
+    holder_type: order_by
+    id: order_by
+    shares: order_by
+    split_contract: hen_split_contract_order_by
+    split_contract_id: order_by
+}
+
+"order by stddev() on columns of table \"hen_shareholder\""
+input hen_shareholder_stddev_order_by {
+    id: order_by
+    shares: order_by
+    split_contract_id: order_by
+}
+
+"order by stddev_pop() on columns of table \"hen_shareholder\""
+input hen_shareholder_stddev_pop_order_by {
+    id: order_by
+    shares: order_by
+    split_contract_id: order_by
+}
+
+"order by stddev_samp() on columns of table \"hen_shareholder\""
+input hen_shareholder_stddev_samp_order_by {
+    id: order_by
+    shares: order_by
+    split_contract_id: order_by
+}
+
+"order by sum() on columns of table \"hen_shareholder\""
+input hen_shareholder_sum_order_by {
+    id: order_by
+    shares: order_by
+    split_contract_id: order_by
+}
+
+"order by var_pop() on columns of table \"hen_shareholder\""
+input hen_shareholder_var_pop_order_by {
+    id: order_by
+    shares: order_by
+    split_contract_id: order_by
+}
+
+"order by var_samp() on columns of table \"hen_shareholder\""
+input hen_shareholder_var_samp_order_by {
+    id: order_by
+    shares: order_by
+    split_contract_id: order_by
+}
+
+"order by variance() on columns of table \"hen_shareholder\""
+input hen_shareholder_variance_order_by {
+    id: order_by
+    shares: order_by
+    split_contract_id: order_by
+}
+
+"order by aggregate values of table \"hen_split_contract\""
+input hen_split_contract_aggregate_order_by {
+    avg: hen_split_contract_avg_order_by
+    count: order_by
+    max: hen_split_contract_max_order_by
+    min: hen_split_contract_min_order_by
+    stddev: hen_split_contract_stddev_order_by
+    stddev_pop: hen_split_contract_stddev_pop_order_by
+    stddev_samp: hen_split_contract_stddev_samp_order_by
+    sum: hen_split_contract_sum_order_by
+    var_pop: hen_split_contract_var_pop_order_by
+    var_samp: hen_split_contract_var_samp_order_by
+    variance: hen_split_contract_variance_order_by
+}
+
+"order by avg() on columns of table \"hen_split_contract\""
+input hen_split_contract_avg_order_by {
+    id: order_by
+    total_shares: order_by
+}
+
+"Boolean expression to filter rows from the table \"hen_split_contract\". All fields are combined with a logical 'AND'."
+input hen_split_contract_bool_exp {
+    _and: [hen_split_contract_bool_exp!]
+    _not: hen_split_contract_bool_exp
+    _or: [hen_split_contract_bool_exp!]
+    administrator: String_comparison_exp
+    contract: holder_bool_exp
+    contract_id: String_comparison_exp
+    id: Int_comparison_exp
+    shareholder: hen_shareholder_bool_exp
+    total_shares: bigint_comparison_exp
+}
+
+"order by max() on columns of table \"hen_split_contract\""
+input hen_split_contract_max_order_by {
+    administrator: order_by
+    contract_id: order_by
+    id: order_by
+    total_shares: order_by
+}
+
+"order by min() on columns of table \"hen_split_contract\""
+input hen_split_contract_min_order_by {
+    administrator: order_by
+    contract_id: order_by
+    id: order_by
+    total_shares: order_by
+}
+
+"Ordering options when selecting data from \"hen_split_contract\"."
+input hen_split_contract_order_by {
+    administrator: order_by
+    contract: holder_order_by
+    contract_id: order_by
+    id: order_by
+    shareholder_aggregate: hen_shareholder_aggregate_order_by
+    total_shares: order_by
+}
+
+"order by stddev() on columns of table \"hen_split_contract\""
+input hen_split_contract_stddev_order_by {
+    id: order_by
+    total_shares: order_by
+}
+
+"order by stddev_pop() on columns of table \"hen_split_contract\""
+input hen_split_contract_stddev_pop_order_by {
+    id: order_by
+    total_shares: order_by
+}
+
+"order by stddev_samp() on columns of table \"hen_split_contract\""
+input hen_split_contract_stddev_samp_order_by {
+    id: order_by
+    total_shares: order_by
+}
+
+"order by sum() on columns of table \"hen_split_contract\""
+input hen_split_contract_sum_order_by {
+    id: order_by
+    total_shares: order_by
+}
+
+"order by var_pop() on columns of table \"hen_split_contract\""
+input hen_split_contract_var_pop_order_by {
+    id: order_by
+    total_shares: order_by
+}
+
+"order by var_samp() on columns of table \"hen_split_contract\""
+input hen_split_contract_var_samp_order_by {
+    id: order_by
+    total_shares: order_by
+}
+
+"order by variance() on columns of table \"hen_split_contract\""
+input hen_split_contract_variance_order_by {
+    id: order_by
+    total_shares: order_by
+}
+
+"order by aggregate values of table \"hen_split_signature\""
+input hen_split_signature_aggregate_order_by {
+    avg: hen_split_signature_avg_order_by
+    count: order_by
+    max: hen_split_signature_max_order_by
+    min: hen_split_signature_min_order_by
+    stddev: hen_split_signature_stddev_order_by
+    stddev_pop: hen_split_signature_stddev_pop_order_by
+    stddev_samp: hen_split_signature_stddev_samp_order_by
+    sum: hen_split_signature_sum_order_by
+    var_pop: hen_split_signature_var_pop_order_by
+    var_samp: hen_split_signature_var_samp_order_by
+    variance: hen_split_signature_variance_order_by
+}
+
+"order by avg() on columns of table \"hen_split_signature\""
+input hen_split_signature_avg_order_by {
+    id: order_by
+    token_id: order_by
+}
+
+"Boolean expression to filter rows from the table \"hen_split_signature\". All fields are combined with a logical 'AND'."
+input hen_split_signature_bool_exp {
+    _and: [hen_split_signature_bool_exp!]
+    _not: hen_split_signature_bool_exp
+    _or: [hen_split_signature_bool_exp!]
+    holder: holder_bool_exp
+    holder_id: String_comparison_exp
+    id: Int_comparison_exp
+    token: token_bool_exp
+    token_id: bigint_comparison_exp
+}
+
+"order by max() on columns of table \"hen_split_signature\""
+input hen_split_signature_max_order_by {
+    holder_id: order_by
+    id: order_by
+    token_id: order_by
+}
+
+"order by min() on columns of table \"hen_split_signature\""
+input hen_split_signature_min_order_by {
+    holder_id: order_by
+    id: order_by
+    token_id: order_by
+}
+
+"Ordering options when selecting data from \"hen_split_signature\"."
+input hen_split_signature_order_by {
+    holder: holder_order_by
+    holder_id: order_by
+    id: order_by
+    token: token_order_by
+    token_id: order_by
+}
+
+"order by stddev() on columns of table \"hen_split_signature\""
+input hen_split_signature_stddev_order_by {
+    id: order_by
+    token_id: order_by
+}
+
+"order by stddev_pop() on columns of table \"hen_split_signature\""
+input hen_split_signature_stddev_pop_order_by {
+    id: order_by
+    token_id: order_by
+}
+
+"order by stddev_samp() on columns of table \"hen_split_signature\""
+input hen_split_signature_stddev_samp_order_by {
+    id: order_by
+    token_id: order_by
+}
+
+"order by sum() on columns of table \"hen_split_signature\""
+input hen_split_signature_sum_order_by {
+    id: order_by
+    token_id: order_by
+}
+
+"order by var_pop() on columns of table \"hen_split_signature\""
+input hen_split_signature_var_pop_order_by {
+    id: order_by
+    token_id: order_by
+}
+
+"order by var_samp() on columns of table \"hen_split_signature\""
+input hen_split_signature_var_samp_order_by {
+    id: order_by
+    token_id: order_by
+}
+
+"order by variance() on columns of table \"hen_split_signature\""
+input hen_split_signature_variance_order_by {
+    id: order_by
+    token_id: order_by
+}
+
+"order by aggregate values of table \"hen_swap\""
+input hen_swap_aggregate_order_by {
+    avg: hen_swap_avg_order_by
+    count: order_by
+    max: hen_swap_max_order_by
+    min: hen_swap_min_order_by
+    stddev: hen_swap_stddev_order_by
+    stddev_pop: hen_swap_stddev_pop_order_by
+    stddev_samp: hen_swap_stddev_samp_order_by
+    sum: hen_swap_sum_order_by
+    var_pop: hen_swap_var_pop_order_by
+    var_samp: hen_swap_var_samp_order_by
+    variance: hen_swap_variance_order_by
+}
+
+"order by avg() on columns of table \"hen_swap\""
+input hen_swap_avg_order_by {
+    amount: order_by
+    amount_left: order_by
+    contract_version: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+}
+
+"Boolean expression to filter rows from the table \"hen_swap\". All fields are combined with a logical 'AND'."
+input hen_swap_bool_exp {
+    _and: [hen_swap_bool_exp!]
+    _not: hen_swap_bool_exp
+    _or: [hen_swap_bool_exp!]
+    amount: smallint_comparison_exp
+    amount_left: smallint_comparison_exp
+    contract_version: smallint_comparison_exp
+    creator: holder_bool_exp
+    creator_id: String_comparison_exp
+    id: bigint_comparison_exp
+    is_valid: Boolean_comparison_exp
+    level: bigint_comparison_exp
+    price: bigint_comparison_exp
+    royalties: smallint_comparison_exp
+    status: swap_status_type_comparison_exp
+    timestamp: timestamptz_comparison_exp
+    token: token_bool_exp
+    token_id: bigint_comparison_exp
+    trades: hen_trade_bool_exp
+}
+
+"order by max() on columns of table \"hen_swap\""
+input hen_swap_max_order_by {
+    amount: order_by
+    amount_left: order_by
+    contract_version: order_by
+    creator_id: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    timestamp: order_by
+    token_id: order_by
+}
+
+"order by min() on columns of table \"hen_swap\""
+input hen_swap_min_order_by {
+    amount: order_by
+    amount_left: order_by
+    contract_version: order_by
+    creator_id: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    timestamp: order_by
+    token_id: order_by
+}
+
+"Ordering options when selecting data from \"hen_swap\"."
+input hen_swap_order_by {
+    amount: order_by
+    amount_left: order_by
+    contract_version: order_by
+    creator: holder_order_by
+    creator_id: order_by
+    id: order_by
+    is_valid: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    status: order_by
+    timestamp: order_by
+    token: token_order_by
+    token_id: order_by
+    trades_aggregate: hen_trade_aggregate_order_by
+}
+
+"order by stddev() on columns of table \"hen_swap\""
+input hen_swap_stddev_order_by {
+    amount: order_by
+    amount_left: order_by
+    contract_version: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+}
+
+"order by stddev_pop() on columns of table \"hen_swap\""
+input hen_swap_stddev_pop_order_by {
+    amount: order_by
+    amount_left: order_by
+    contract_version: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+}
+
+"order by stddev_samp() on columns of table \"hen_swap\""
+input hen_swap_stddev_samp_order_by {
+    amount: order_by
+    amount_left: order_by
+    contract_version: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+}
+
+"order by sum() on columns of table \"hen_swap\""
+input hen_swap_sum_order_by {
+    amount: order_by
+    amount_left: order_by
+    contract_version: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+}
+
+"order by var_pop() on columns of table \"hen_swap\""
+input hen_swap_var_pop_order_by {
+    amount: order_by
+    amount_left: order_by
+    contract_version: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+}
+
+"order by var_samp() on columns of table \"hen_swap\""
+input hen_swap_var_samp_order_by {
+    amount: order_by
+    amount_left: order_by
+    contract_version: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+}
+
+"order by variance() on columns of table \"hen_swap\""
+input hen_swap_variance_order_by {
+    amount: order_by
+    amount_left: order_by
+    contract_version: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+}
+
+"order by aggregate values of table \"hen_trade\""
+input hen_trade_aggregate_order_by {
+    avg: hen_trade_avg_order_by
+    count: order_by
+    max: hen_trade_max_order_by
+    min: hen_trade_min_order_by
+    stddev: hen_trade_stddev_order_by
+    stddev_pop: hen_trade_stddev_pop_order_by
+    stddev_samp: hen_trade_stddev_samp_order_by
+    sum: hen_trade_sum_order_by
+    var_pop: hen_trade_var_pop_order_by
+    var_samp: hen_trade_var_samp_order_by
+    variance: hen_trade_variance_order_by
+}
+
+"order by avg() on columns of table \"hen_trade\""
+input hen_trade_avg_order_by {
+    amount: order_by
+    id: order_by
+    level: order_by
+    swap_id: order_by
+    token_id: order_by
+}
+
+"Boolean expression to filter rows from the table \"hen_trade\". All fields are combined with a logical 'AND'."
+input hen_trade_bool_exp {
+    _and: [hen_trade_bool_exp!]
+    _not: hen_trade_bool_exp
+    _or: [hen_trade_bool_exp!]
+    amount: bigint_comparison_exp
+    buyer: holder_bool_exp
+    buyer_id: String_comparison_exp
+    id: bigint_comparison_exp
+    level: bigint_comparison_exp
+    seller: holder_bool_exp
+    seller_id: String_comparison_exp
+    swap: hen_swap_bool_exp
+    swap_id: bigint_comparison_exp
+    timestamp: timestamptz_comparison_exp
+    token: token_bool_exp
+    token_id: bigint_comparison_exp
+}
+
+"order by max() on columns of table \"hen_trade\""
+input hen_trade_max_order_by {
+    amount: order_by
+    buyer_id: order_by
+    id: order_by
+    level: order_by
+    seller_id: order_by
+    swap_id: order_by
+    timestamp: order_by
+    token_id: order_by
+}
+
+"order by min() on columns of table \"hen_trade\""
+input hen_trade_min_order_by {
+    amount: order_by
+    buyer_id: order_by
+    id: order_by
+    level: order_by
+    seller_id: order_by
+    swap_id: order_by
+    timestamp: order_by
+    token_id: order_by
+}
+
+"Ordering options when selecting data from \"hen_trade\"."
+input hen_trade_order_by {
+    amount: order_by
+    buyer: holder_order_by
+    buyer_id: order_by
+    id: order_by
+    level: order_by
+    seller: holder_order_by
+    seller_id: order_by
+    swap: hen_swap_order_by
+    swap_id: order_by
+    timestamp: order_by
+    token: token_order_by
+    token_id: order_by
+}
+
+"order by stddev() on columns of table \"hen_trade\""
+input hen_trade_stddev_order_by {
+    amount: order_by
+    id: order_by
+    level: order_by
+    swap_id: order_by
+    token_id: order_by
+}
+
+"order by stddev_pop() on columns of table \"hen_trade\""
+input hen_trade_stddev_pop_order_by {
+    amount: order_by
+    id: order_by
+    level: order_by
+    swap_id: order_by
+    token_id: order_by
+}
+
+"order by stddev_samp() on columns of table \"hen_trade\""
+input hen_trade_stddev_samp_order_by {
+    amount: order_by
+    id: order_by
+    level: order_by
+    swap_id: order_by
+    token_id: order_by
+}
+
+"order by sum() on columns of table \"hen_trade\""
+input hen_trade_sum_order_by {
+    amount: order_by
+    id: order_by
+    level: order_by
+    swap_id: order_by
+    token_id: order_by
+}
+
+"order by var_pop() on columns of table \"hen_trade\""
+input hen_trade_var_pop_order_by {
+    amount: order_by
+    id: order_by
+    level: order_by
+    swap_id: order_by
+    token_id: order_by
+}
+
+"order by var_samp() on columns of table \"hen_trade\""
+input hen_trade_var_samp_order_by {
+    amount: order_by
+    id: order_by
+    level: order_by
+    swap_id: order_by
+    token_id: order_by
+}
+
+"order by variance() on columns of table \"hen_trade\""
+input hen_trade_variance_order_by {
+    amount: order_by
+    id: order_by
+    level: order_by
+    swap_id: order_by
+    token_id: order_by
+}
+
+"Boolean expression to filter rows from the table \"holder\". All fields are combined with a logical 'AND'."
+input holder_bool_exp {
+    _and: [holder_bool_exp!]
+    _not: holder_bool_exp
+    _or: [holder_bool_exp!]
+    address: String_comparison_exp
+    alias: String_comparison_exp
+    asks: obj_ask_bool_exp
+    bids: obj_bid_bool_exp
+    bought_asks: obj_fulfilled_ask_bool_exp
+    collaborations: fa2_collaborators_bool_exp
+    collections: fa2_bool_exp
+    created_dutch_auctions: obj_dutch_auction_bool_exp
+    created_english_auctions: obj_english_auction_bool_exp
+    description: String_comparison_exp
+    discord: String_comparison_exp
+    domain_records: tzd_record_bool_exp
+    email: String_comparison_exp
+    english_bids: obj_english_bid_bool_exp
+    events: event_bool_exp
+    events_from: event_bool_exp
+    facebook: String_comparison_exp
+    flag: flag_type_comparison_exp
+    github: String_comparison_exp
+    gitlab: String_comparison_exp
+    highest_english_bids: obj_english_auction_bool_exp
+    holder_signatures: hen_split_signature_bool_exp
+    holder_type: holder_type_comparison_exp
+    holders_token: token_holder_bool_exp
+    instagram: String_comparison_exp
+    last_metadata_update: timestamptz_comparison_exp
+    medium: String_comparison_exp
+    purchases: hen_trade_bool_exp
+    reddit: String_comparison_exp
+    sales: hen_trade_bool_exp
+    sales_stat: sales_stat_bool_exp
+    shareholder: hen_shareholder_bool_exp
+    shares: hen_split_contract_bool_exp
+    site: String_comparison_exp
+    slack: String_comparison_exp
+    sold_asks: obj_fulfilled_ask_bool_exp
+    sold_bids: obj_bid_bool_exp
+    starring_asks: obj_ask_bool_exp
+    starring_bids: obj_bid_bool_exp
+    starring_dutch_auctions: obj_dutch_auction_bool_exp
+    starring_english_auctions: obj_english_auction_bool_exp
+    support: String_comparison_exp
+    swaps: hen_swap_bool_exp
+    telegram: String_comparison_exp
+    tokens: token_bool_exp
+    twitter: String_comparison_exp
+    tzdomain: String_comparison_exp
+    won_dutch_auctions: obj_dutch_auction_bool_exp
+}
+
+"Ordering options when selecting data from \"holder\"."
+input holder_order_by {
+    address: order_by
+    alias: order_by
+    asks_aggregate: obj_ask_aggregate_order_by
+    bids_aggregate: obj_bid_aggregate_order_by
+    bought_asks_aggregate: obj_fulfilled_ask_aggregate_order_by
+    collaborations_aggregate: fa2_collaborators_aggregate_order_by
+    collections_aggregate: fa2_aggregate_order_by
+    created_dutch_auctions_aggregate: obj_dutch_auction_aggregate_order_by
+    created_english_auctions_aggregate: obj_english_auction_aggregate_order_by
+    description: order_by
+    discord: order_by
+    domain_records_aggregate: tzd_record_aggregate_order_by
+    email: order_by
+    english_bids_aggregate: obj_english_bid_aggregate_order_by
+    events_aggregate: event_aggregate_order_by
+    events_from_aggregate: event_aggregate_order_by
+    facebook: order_by
+    flag: order_by
+    github: order_by
+    gitlab: order_by
+    highest_english_bids_aggregate: obj_english_auction_aggregate_order_by
+    holder_signatures_aggregate: hen_split_signature_aggregate_order_by
+    holder_type: order_by
+    holders_token_aggregate: token_holder_aggregate_order_by
+    instagram: order_by
+    last_metadata_update: order_by
+    medium: order_by
+    purchases_aggregate: hen_trade_aggregate_order_by
+    reddit: order_by
+    sales_aggregate: hen_trade_aggregate_order_by
+    sales_stat_aggregate: sales_stat_aggregate_order_by
+    shareholder_aggregate: hen_shareholder_aggregate_order_by
+    shares_aggregate: hen_split_contract_aggregate_order_by
+    site: order_by
+    slack: order_by
+    sold_asks_aggregate: obj_fulfilled_ask_aggregate_order_by
+    sold_bids_aggregate: obj_bid_aggregate_order_by
+    starring_asks_aggregate: obj_ask_aggregate_order_by
+    starring_bids_aggregate: obj_bid_aggregate_order_by
+    starring_dutch_auctions_aggregate: obj_dutch_auction_aggregate_order_by
+    starring_english_auctions_aggregate: obj_english_auction_aggregate_order_by
+    support: order_by
+    swaps_aggregate: hen_swap_aggregate_order_by
+    telegram: order_by
+    tokens_aggregate: token_aggregate_order_by
+    twitter: order_by
+    tzdomain: order_by
+    won_dutch_auctions_aggregate: obj_dutch_auction_aggregate_order_by
+}
+
+"Boolean expression to compare columns of type \"holder_type\". All fields are combined with logical 'AND'."
+input holder_type_comparison_exp {
+    _eq: holder_type
+    _gt: holder_type
+    _gte: holder_type
+    _in: [holder_type!]
+    _is_null: Boolean
+    _lt: holder_type
+    _lte: holder_type
+    _neq: holder_type
+    _nin: [holder_type!]
+}
+
+"Boolean expression to compare columns of type \"jsonb\". All fields are combined with logical 'AND'."
+input jsonb_comparison_exp {
+    "is the column contained in the given json value"
+    _contained_in: jsonb
+    "does the column contain the given json value at the top level"
+    _contains: jsonb
+    _eq: jsonb
+    _gt: jsonb
+    _gte: jsonb
+    "does the string exist as a top-level key in the column"
+    _has_key: String
+    "do all of these strings exist as top-level keys in the column"
+    _has_keys_all: [String!]
+    "do any of these strings exist as top-level keys in the column"
+    _has_keys_any: [String!]
+    _in: [jsonb!]
+    _is_null: Boolean
+    _lt: jsonb
+    _lte: jsonb
+    _neq: jsonb
+    _nin: [jsonb!]
+}
+
+"order by aggregate values of table \"obj_ask\""
+input obj_ask_aggregate_order_by {
+    avg: obj_ask_avg_order_by
+    count: order_by
+    max: obj_ask_max_order_by
+    min: obj_ask_min_order_by
+    stddev: obj_ask_stddev_order_by
+    stddev_pop: obj_ask_stddev_pop_order_by
+    stddev_samp: obj_ask_stddev_samp_order_by
+    sum: obj_ask_sum_order_by
+    var_pop: obj_ask_var_pop_order_by
+    var_samp: obj_ask_var_samp_order_by
+    variance: obj_ask_variance_order_by
+}
+
+"order by avg() on columns of table \"obj_ask\""
+input obj_ask_avg_order_by {
+    amount: order_by
+    amount_left: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"Boolean expression to filter rows from the table \"obj_ask\". All fields are combined with a logical 'AND'."
+input obj_ask_bool_exp {
+    _and: [obj_ask_bool_exp!]
+    _not: obj_ask_bool_exp
+    _or: [obj_ask_bool_exp!]
+    amount: bigint_comparison_exp
+    amount_left: bigint_comparison_exp
+    artist: holder_bool_exp
+    artist_id: String_comparison_exp
+    creator: holder_bool_exp
+    creator_id: String_comparison_exp
+    fa2: fa2_bool_exp
+    fa2_id: String_comparison_exp
+    fulfilled: obj_fulfilled_ask_bool_exp
+    id: bigint_comparison_exp
+    level: bigint_comparison_exp
+    price: bigint_comparison_exp
+    royalties: bigint_comparison_exp
+    status: auction_status_type_comparison_exp
+    timestamp: timestamptz_comparison_exp
+    token: token_bool_exp
+    token_id: bigint_comparison_exp
+    update_level: bigint_comparison_exp
+    update_timestamp: timestamptz_comparison_exp
+}
+
+"order by max() on columns of table \"obj_ask\""
+input obj_ask_max_order_by {
+    amount: order_by
+    amount_left: order_by
+    artist_id: order_by
+    creator_id: order_by
+    fa2_id: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    timestamp: order_by
+    token_id: order_by
+    update_level: order_by
+    update_timestamp: order_by
+}
+
+"order by min() on columns of table \"obj_ask\""
+input obj_ask_min_order_by {
+    amount: order_by
+    amount_left: order_by
+    artist_id: order_by
+    creator_id: order_by
+    fa2_id: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    timestamp: order_by
+    token_id: order_by
+    update_level: order_by
+    update_timestamp: order_by
+}
+
+"Ordering options when selecting data from \"obj_ask\"."
+input obj_ask_order_by {
+    amount: order_by
+    amount_left: order_by
+    artist: holder_order_by
+    artist_id: order_by
+    creator: holder_order_by
+    creator_id: order_by
+    fa2: fa2_order_by
+    fa2_id: order_by
+    fulfilled_aggregate: obj_fulfilled_ask_aggregate_order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    status: order_by
+    timestamp: order_by
+    token: token_order_by
+    token_id: order_by
+    update_level: order_by
+    update_timestamp: order_by
+}
+
+"order by stddev() on columns of table \"obj_ask\""
+input obj_ask_stddev_order_by {
+    amount: order_by
+    amount_left: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by stddev_pop() on columns of table \"obj_ask\""
+input obj_ask_stddev_pop_order_by {
+    amount: order_by
+    amount_left: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by stddev_samp() on columns of table \"obj_ask\""
+input obj_ask_stddev_samp_order_by {
+    amount: order_by
+    amount_left: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by sum() on columns of table \"obj_ask\""
+input obj_ask_sum_order_by {
+    amount: order_by
+    amount_left: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by var_pop() on columns of table \"obj_ask\""
+input obj_ask_var_pop_order_by {
+    amount: order_by
+    amount_left: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by var_samp() on columns of table \"obj_ask\""
+input obj_ask_var_samp_order_by {
+    amount: order_by
+    amount_left: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by variance() on columns of table \"obj_ask\""
+input obj_ask_variance_order_by {
+    amount: order_by
+    amount_left: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by aggregate values of table \"obj_bid\""
+input obj_bid_aggregate_order_by {
+    avg: obj_bid_avg_order_by
+    count: order_by
+    max: obj_bid_max_order_by
+    min: obj_bid_min_order_by
+    stddev: obj_bid_stddev_order_by
+    stddev_pop: obj_bid_stddev_pop_order_by
+    stddev_samp: obj_bid_stddev_samp_order_by
+    sum: obj_bid_sum_order_by
+    var_pop: obj_bid_var_pop_order_by
+    var_samp: obj_bid_var_samp_order_by
+    variance: obj_bid_variance_order_by
+}
+
+"order by avg() on columns of table \"obj_bid\""
+input obj_bid_avg_order_by {
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"Boolean expression to filter rows from the table \"obj_bid\". All fields are combined with a logical 'AND'."
+input obj_bid_bool_exp {
+    _and: [obj_bid_bool_exp!]
+    _not: obj_bid_bool_exp
+    _or: [obj_bid_bool_exp!]
+    artist: holder_bool_exp
+    artist_id: String_comparison_exp
+    creator: holder_bool_exp
+    creator_id: String_comparison_exp
+    fa2: fa2_bool_exp
+    fa2_id: String_comparison_exp
+    id: bigint_comparison_exp
+    level: bigint_comparison_exp
+    price: bigint_comparison_exp
+    royalties: bigint_comparison_exp
+    seller: holder_bool_exp
+    seller_id: String_comparison_exp
+    status: auction_status_type_comparison_exp
+    timestamp: timestamptz_comparison_exp
+    token: token_bool_exp
+    token_id: bigint_comparison_exp
+    update_level: bigint_comparison_exp
+    update_timestamp: timestamptz_comparison_exp
+}
+
+"order by max() on columns of table \"obj_bid\""
+input obj_bid_max_order_by {
+    artist_id: order_by
+    creator_id: order_by
+    fa2_id: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    seller_id: order_by
+    timestamp: order_by
+    token_id: order_by
+    update_level: order_by
+    update_timestamp: order_by
+}
+
+"order by min() on columns of table \"obj_bid\""
+input obj_bid_min_order_by {
+    artist_id: order_by
+    creator_id: order_by
+    fa2_id: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    seller_id: order_by
+    timestamp: order_by
+    token_id: order_by
+    update_level: order_by
+    update_timestamp: order_by
+}
+
+"Ordering options when selecting data from \"obj_bid\"."
+input obj_bid_order_by {
+    artist: holder_order_by
+    artist_id: order_by
+    creator: holder_order_by
+    creator_id: order_by
+    fa2: fa2_order_by
+    fa2_id: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    seller: holder_order_by
+    seller_id: order_by
+    status: order_by
+    timestamp: order_by
+    token: token_order_by
+    token_id: order_by
+    update_level: order_by
+    update_timestamp: order_by
+}
+
+"order by stddev() on columns of table \"obj_bid\""
+input obj_bid_stddev_order_by {
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by stddev_pop() on columns of table \"obj_bid\""
+input obj_bid_stddev_pop_order_by {
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by stddev_samp() on columns of table \"obj_bid\""
+input obj_bid_stddev_samp_order_by {
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by sum() on columns of table \"obj_bid\""
+input obj_bid_sum_order_by {
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by var_pop() on columns of table \"obj_bid\""
+input obj_bid_var_pop_order_by {
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by var_samp() on columns of table \"obj_bid\""
+input obj_bid_var_samp_order_by {
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by variance() on columns of table \"obj_bid\""
+input obj_bid_variance_order_by {
+    id: order_by
+    level: order_by
+    price: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by aggregate values of table \"obj_dutch_auction\""
+input obj_dutch_auction_aggregate_order_by {
+    avg: obj_dutch_auction_avg_order_by
+    count: order_by
+    max: obj_dutch_auction_max_order_by
+    min: obj_dutch_auction_min_order_by
+    stddev: obj_dutch_auction_stddev_order_by
+    stddev_pop: obj_dutch_auction_stddev_pop_order_by
+    stddev_samp: obj_dutch_auction_stddev_samp_order_by
+    sum: obj_dutch_auction_sum_order_by
+    var_pop: obj_dutch_auction_var_pop_order_by
+    var_samp: obj_dutch_auction_var_samp_order_by
+    variance: obj_dutch_auction_variance_order_by
+}
+
+"order by avg() on columns of table \"obj_dutch_auction\""
+input obj_dutch_auction_avg_order_by {
+    buy_price: order_by
+    contract_version: order_by
+    end_price: order_by
+    id: order_by
+    level: order_by
+    royalties: order_by
+    start_price: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"Boolean expression to filter rows from the table \"obj_dutch_auction\". All fields are combined with a logical 'AND'."
+input obj_dutch_auction_bool_exp {
+    _and: [obj_dutch_auction_bool_exp!]
+    _not: obj_dutch_auction_bool_exp
+    _or: [obj_dutch_auction_bool_exp!]
+    artist: holder_bool_exp
+    artist_id: String_comparison_exp
+    buy_price: bigint_comparison_exp
+    buyer: holder_bool_exp
+    buyer_id: String_comparison_exp
+    contract_version: smallint_comparison_exp
+    creator: holder_bool_exp
+    creator_id: String_comparison_exp
+    end_price: bigint_comparison_exp
+    end_time: timestamptz_comparison_exp
+    fa2: fa2_bool_exp
+    fa2_id: String_comparison_exp
+    hash: String_comparison_exp
+    id: bigint_comparison_exp
+    level: bigint_comparison_exp
+    royalties: bigint_comparison_exp
+    start_price: bigint_comparison_exp
+    start_time: timestamptz_comparison_exp
+    status: auction_status_type_comparison_exp
+    timestamp: timestamptz_comparison_exp
+    token: token_bool_exp
+    token_id: bigint_comparison_exp
+    update_level: bigint_comparison_exp
+    update_timestamp: timestamptz_comparison_exp
+}
+
+"order by max() on columns of table \"obj_dutch_auction\""
+input obj_dutch_auction_max_order_by {
+    artist_id: order_by
+    buy_price: order_by
+    buyer_id: order_by
+    contract_version: order_by
+    creator_id: order_by
+    end_price: order_by
+    end_time: order_by
+    fa2_id: order_by
+    hash: order_by
+    id: order_by
+    level: order_by
+    royalties: order_by
+    start_price: order_by
+    start_time: order_by
+    timestamp: order_by
+    token_id: order_by
+    update_level: order_by
+    update_timestamp: order_by
+}
+
+"order by min() on columns of table \"obj_dutch_auction\""
+input obj_dutch_auction_min_order_by {
+    artist_id: order_by
+    buy_price: order_by
+    buyer_id: order_by
+    contract_version: order_by
+    creator_id: order_by
+    end_price: order_by
+    end_time: order_by
+    fa2_id: order_by
+    hash: order_by
+    id: order_by
+    level: order_by
+    royalties: order_by
+    start_price: order_by
+    start_time: order_by
+    timestamp: order_by
+    token_id: order_by
+    update_level: order_by
+    update_timestamp: order_by
+}
+
+"Ordering options when selecting data from \"obj_dutch_auction\"."
+input obj_dutch_auction_order_by {
+    artist: holder_order_by
+    artist_id: order_by
+    buy_price: order_by
+    buyer: holder_order_by
+    buyer_id: order_by
+    contract_version: order_by
+    creator: holder_order_by
+    creator_id: order_by
+    end_price: order_by
+    end_time: order_by
+    fa2: fa2_order_by
+    fa2_id: order_by
+    hash: order_by
+    id: order_by
+    level: order_by
+    royalties: order_by
+    start_price: order_by
+    start_time: order_by
+    status: order_by
+    timestamp: order_by
+    token: token_order_by
+    token_id: order_by
+    update_level: order_by
+    update_timestamp: order_by
+}
+
+"order by stddev() on columns of table \"obj_dutch_auction\""
+input obj_dutch_auction_stddev_order_by {
+    buy_price: order_by
+    contract_version: order_by
+    end_price: order_by
+    id: order_by
+    level: order_by
+    royalties: order_by
+    start_price: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by stddev_pop() on columns of table \"obj_dutch_auction\""
+input obj_dutch_auction_stddev_pop_order_by {
+    buy_price: order_by
+    contract_version: order_by
+    end_price: order_by
+    id: order_by
+    level: order_by
+    royalties: order_by
+    start_price: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by stddev_samp() on columns of table \"obj_dutch_auction\""
+input obj_dutch_auction_stddev_samp_order_by {
+    buy_price: order_by
+    contract_version: order_by
+    end_price: order_by
+    id: order_by
+    level: order_by
+    royalties: order_by
+    start_price: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by sum() on columns of table \"obj_dutch_auction\""
+input obj_dutch_auction_sum_order_by {
+    buy_price: order_by
+    contract_version: order_by
+    end_price: order_by
+    id: order_by
+    level: order_by
+    royalties: order_by
+    start_price: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by var_pop() on columns of table \"obj_dutch_auction\""
+input obj_dutch_auction_var_pop_order_by {
+    buy_price: order_by
+    contract_version: order_by
+    end_price: order_by
+    id: order_by
+    level: order_by
+    royalties: order_by
+    start_price: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by var_samp() on columns of table \"obj_dutch_auction\""
+input obj_dutch_auction_var_samp_order_by {
+    buy_price: order_by
+    contract_version: order_by
+    end_price: order_by
+    id: order_by
+    level: order_by
+    royalties: order_by
+    start_price: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by variance() on columns of table \"obj_dutch_auction\""
+input obj_dutch_auction_variance_order_by {
+    buy_price: order_by
+    contract_version: order_by
+    end_price: order_by
+    id: order_by
+    level: order_by
+    royalties: order_by
+    start_price: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by aggregate values of table \"obj_english_auction\""
+input obj_english_auction_aggregate_order_by {
+    avg: obj_english_auction_avg_order_by
+    count: order_by
+    max: obj_english_auction_max_order_by
+    min: obj_english_auction_min_order_by
+    stddev: obj_english_auction_stddev_order_by
+    stddev_pop: obj_english_auction_stddev_pop_order_by
+    stddev_samp: obj_english_auction_stddev_samp_order_by
+    sum: obj_english_auction_sum_order_by
+    var_pop: obj_english_auction_var_pop_order_by
+    var_samp: obj_english_auction_var_samp_order_by
+    variance: obj_english_auction_variance_order_by
+}
+
+"order by avg() on columns of table \"obj_english_auction\""
+input obj_english_auction_avg_order_by {
+    contract_version: order_by
+    extension_time: order_by
+    highest_bid: order_by
+    id: order_by
+    level: order_by
+    price_increment: order_by
+    reserve: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"Boolean expression to filter rows from the table \"obj_english_auction\". All fields are combined with a logical 'AND'."
+input obj_english_auction_bool_exp {
+    _and: [obj_english_auction_bool_exp!]
+    _not: obj_english_auction_bool_exp
+    _or: [obj_english_auction_bool_exp!]
+    artist: holder_bool_exp
+    artist_id: String_comparison_exp
+    bids: obj_english_bid_bool_exp
+    contract_version: smallint_comparison_exp
+    creator: holder_bool_exp
+    creator_id: String_comparison_exp
+    end_time: timestamptz_comparison_exp
+    extension_time: bigint_comparison_exp
+    fa2: fa2_bool_exp
+    fa2_id: String_comparison_exp
+    hash: String_comparison_exp
+    highest_bid: bigint_comparison_exp
+    highest_bidder: holder_bool_exp
+    highest_bidder_id: String_comparison_exp
+    id: bigint_comparison_exp
+    level: bigint_comparison_exp
+    price_increment: bigint_comparison_exp
+    reserve: bigint_comparison_exp
+    royalties: bigint_comparison_exp
+    start_time: timestamptz_comparison_exp
+    status: auction_status_type_comparison_exp
+    timestamp: timestamptz_comparison_exp
+    token: token_bool_exp
+    token_id: bigint_comparison_exp
+    update_level: bigint_comparison_exp
+    update_timestamp: timestamptz_comparison_exp
+}
+
+"order by max() on columns of table \"obj_english_auction\""
+input obj_english_auction_max_order_by {
+    artist_id: order_by
+    contract_version: order_by
+    creator_id: order_by
+    end_time: order_by
+    extension_time: order_by
+    fa2_id: order_by
+    hash: order_by
+    highest_bid: order_by
+    highest_bidder_id: order_by
+    id: order_by
+    level: order_by
+    price_increment: order_by
+    reserve: order_by
+    royalties: order_by
+    start_time: order_by
+    timestamp: order_by
+    token_id: order_by
+    update_level: order_by
+    update_timestamp: order_by
+}
+
+"order by min() on columns of table \"obj_english_auction\""
+input obj_english_auction_min_order_by {
+    artist_id: order_by
+    contract_version: order_by
+    creator_id: order_by
+    end_time: order_by
+    extension_time: order_by
+    fa2_id: order_by
+    hash: order_by
+    highest_bid: order_by
+    highest_bidder_id: order_by
+    id: order_by
+    level: order_by
+    price_increment: order_by
+    reserve: order_by
+    royalties: order_by
+    start_time: order_by
+    timestamp: order_by
+    token_id: order_by
+    update_level: order_by
+    update_timestamp: order_by
+}
+
+"Ordering options when selecting data from \"obj_english_auction\"."
+input obj_english_auction_order_by {
+    artist: holder_order_by
+    artist_id: order_by
+    bids_aggregate: obj_english_bid_aggregate_order_by
+    contract_version: order_by
+    creator: holder_order_by
+    creator_id: order_by
+    end_time: order_by
+    extension_time: order_by
+    fa2: fa2_order_by
+    fa2_id: order_by
+    hash: order_by
+    highest_bid: order_by
+    highest_bidder: holder_order_by
+    highest_bidder_id: order_by
+    id: order_by
+    level: order_by
+    price_increment: order_by
+    reserve: order_by
+    royalties: order_by
+    start_time: order_by
+    status: order_by
+    timestamp: order_by
+    token: token_order_by
+    token_id: order_by
+    update_level: order_by
+    update_timestamp: order_by
+}
+
+"order by stddev() on columns of table \"obj_english_auction\""
+input obj_english_auction_stddev_order_by {
+    contract_version: order_by
+    extension_time: order_by
+    highest_bid: order_by
+    id: order_by
+    level: order_by
+    price_increment: order_by
+    reserve: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by stddev_pop() on columns of table \"obj_english_auction\""
+input obj_english_auction_stddev_pop_order_by {
+    contract_version: order_by
+    extension_time: order_by
+    highest_bid: order_by
+    id: order_by
+    level: order_by
+    price_increment: order_by
+    reserve: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by stddev_samp() on columns of table \"obj_english_auction\""
+input obj_english_auction_stddev_samp_order_by {
+    contract_version: order_by
+    extension_time: order_by
+    highest_bid: order_by
+    id: order_by
+    level: order_by
+    price_increment: order_by
+    reserve: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by sum() on columns of table \"obj_english_auction\""
+input obj_english_auction_sum_order_by {
+    contract_version: order_by
+    extension_time: order_by
+    highest_bid: order_by
+    id: order_by
+    level: order_by
+    price_increment: order_by
+    reserve: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by var_pop() on columns of table \"obj_english_auction\""
+input obj_english_auction_var_pop_order_by {
+    contract_version: order_by
+    extension_time: order_by
+    highest_bid: order_by
+    id: order_by
+    level: order_by
+    price_increment: order_by
+    reserve: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by var_samp() on columns of table \"obj_english_auction\""
+input obj_english_auction_var_samp_order_by {
+    contract_version: order_by
+    extension_time: order_by
+    highest_bid: order_by
+    id: order_by
+    level: order_by
+    price_increment: order_by
+    reserve: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by variance() on columns of table \"obj_english_auction\""
+input obj_english_auction_variance_order_by {
+    contract_version: order_by
+    extension_time: order_by
+    highest_bid: order_by
+    id: order_by
+    level: order_by
+    price_increment: order_by
+    reserve: order_by
+    royalties: order_by
+    token_id: order_by
+    update_level: order_by
+}
+
+"order by aggregate values of table \"obj_english_bid\""
+input obj_english_bid_aggregate_order_by {
+    avg: obj_english_bid_avg_order_by
+    count: order_by
+    max: obj_english_bid_max_order_by
+    min: obj_english_bid_min_order_by
+    stddev: obj_english_bid_stddev_order_by
+    stddev_pop: obj_english_bid_stddev_pop_order_by
+    stddev_samp: obj_english_bid_stddev_samp_order_by
+    sum: obj_english_bid_sum_order_by
+    var_pop: obj_english_bid_var_pop_order_by
+    var_samp: obj_english_bid_var_samp_order_by
+    variance: obj_english_bid_variance_order_by
+}
+
+"order by avg() on columns of table \"obj_english_bid\""
+input obj_english_bid_avg_order_by {
+    amount: order_by
+    auction_id: order_by
+    id: order_by
+    level: order_by
+}
+
+"Boolean expression to filter rows from the table \"obj_english_bid\". All fields are combined with a logical 'AND'."
+input obj_english_bid_bool_exp {
+    _and: [obj_english_bid_bool_exp!]
+    _not: obj_english_bid_bool_exp
+    _or: [obj_english_bid_bool_exp!]
+    amount: bigint_comparison_exp
+    auction: obj_english_auction_bool_exp
+    auction_id: bigint_comparison_exp
+    bidder: holder_bool_exp
+    bidder_id: String_comparison_exp
+    id: bigint_comparison_exp
+    level: bigint_comparison_exp
+    timestamp: timestamptz_comparison_exp
+}
+
+"order by max() on columns of table \"obj_english_bid\""
+input obj_english_bid_max_order_by {
+    amount: order_by
+    auction_id: order_by
+    bidder_id: order_by
+    id: order_by
+    level: order_by
+    timestamp: order_by
+}
+
+"order by min() on columns of table \"obj_english_bid\""
+input obj_english_bid_min_order_by {
+    amount: order_by
+    auction_id: order_by
+    bidder_id: order_by
+    id: order_by
+    level: order_by
+    timestamp: order_by
+}
+
+"Ordering options when selecting data from \"obj_english_bid\"."
+input obj_english_bid_order_by {
+    amount: order_by
+    auction: obj_english_auction_order_by
+    auction_id: order_by
+    bidder: holder_order_by
+    bidder_id: order_by
+    id: order_by
+    level: order_by
+    timestamp: order_by
+}
+
+"order by stddev() on columns of table \"obj_english_bid\""
+input obj_english_bid_stddev_order_by {
+    amount: order_by
+    auction_id: order_by
+    id: order_by
+    level: order_by
+}
+
+"order by stddev_pop() on columns of table \"obj_english_bid\""
+input obj_english_bid_stddev_pop_order_by {
+    amount: order_by
+    auction_id: order_by
+    id: order_by
+    level: order_by
+}
+
+"order by stddev_samp() on columns of table \"obj_english_bid\""
+input obj_english_bid_stddev_samp_order_by {
+    amount: order_by
+    auction_id: order_by
+    id: order_by
+    level: order_by
+}
+
+"order by sum() on columns of table \"obj_english_bid\""
+input obj_english_bid_sum_order_by {
+    amount: order_by
+    auction_id: order_by
+    id: order_by
+    level: order_by
+}
+
+"order by var_pop() on columns of table \"obj_english_bid\""
+input obj_english_bid_var_pop_order_by {
+    amount: order_by
+    auction_id: order_by
+    id: order_by
+    level: order_by
+}
+
+"order by var_samp() on columns of table \"obj_english_bid\""
+input obj_english_bid_var_samp_order_by {
+    amount: order_by
+    auction_id: order_by
+    id: order_by
+    level: order_by
+}
+
+"order by variance() on columns of table \"obj_english_bid\""
+input obj_english_bid_variance_order_by {
+    amount: order_by
+    auction_id: order_by
+    id: order_by
+    level: order_by
+}
+
+"order by aggregate values of table \"obj_fulfilled_ask\""
+input obj_fulfilled_ask_aggregate_order_by {
+    avg: obj_fulfilled_ask_avg_order_by
+    count: order_by
+    max: obj_fulfilled_ask_max_order_by
+    min: obj_fulfilled_ask_min_order_by
+    stddev: obj_fulfilled_ask_stddev_order_by
+    stddev_pop: obj_fulfilled_ask_stddev_pop_order_by
+    stddev_samp: obj_fulfilled_ask_stddev_samp_order_by
+    sum: obj_fulfilled_ask_sum_order_by
+    var_pop: obj_fulfilled_ask_var_pop_order_by
+    var_samp: obj_fulfilled_ask_var_samp_order_by
+    variance: obj_fulfilled_ask_variance_order_by
+}
+
+"order by avg() on columns of table \"obj_fulfilled_ask\""
+input obj_fulfilled_ask_avg_order_by {
+    amount: order_by
+    ask_id: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    token_id: order_by
+}
+
+"Boolean expression to filter rows from the table \"obj_fulfilled_ask\". All fields are combined with a logical 'AND'."
+input obj_fulfilled_ask_bool_exp {
+    _and: [obj_fulfilled_ask_bool_exp!]
+    _not: obj_fulfilled_ask_bool_exp
+    _or: [obj_fulfilled_ask_bool_exp!]
+    amount: bigint_comparison_exp
+    ask: obj_ask_bool_exp
+    ask_id: bigint_comparison_exp
+    buyer: holder_bool_exp
+    buyer_id: String_comparison_exp
+    id: bigint_comparison_exp
+    level: bigint_comparison_exp
+    price: bigint_comparison_exp
+    seller: holder_bool_exp
+    seller_id: String_comparison_exp
+    timestamp: timestamptz_comparison_exp
+    token: token_bool_exp
+    token_id: bigint_comparison_exp
+}
+
+"order by max() on columns of table \"obj_fulfilled_ask\""
+input obj_fulfilled_ask_max_order_by {
+    amount: order_by
+    ask_id: order_by
+    buyer_id: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    seller_id: order_by
+    timestamp: order_by
+    token_id: order_by
+}
+
+"order by min() on columns of table \"obj_fulfilled_ask\""
+input obj_fulfilled_ask_min_order_by {
+    amount: order_by
+    ask_id: order_by
+    buyer_id: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    seller_id: order_by
+    timestamp: order_by
+    token_id: order_by
+}
+
+"Ordering options when selecting data from \"obj_fulfilled_ask\"."
+input obj_fulfilled_ask_order_by {
+    amount: order_by
+    ask: obj_ask_order_by
+    ask_id: order_by
+    buyer: holder_order_by
+    buyer_id: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    seller: holder_order_by
+    seller_id: order_by
+    timestamp: order_by
+    token: token_order_by
+    token_id: order_by
+}
+
+"order by stddev() on columns of table \"obj_fulfilled_ask\""
+input obj_fulfilled_ask_stddev_order_by {
+    amount: order_by
+    ask_id: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    token_id: order_by
+}
+
+"order by stddev_pop() on columns of table \"obj_fulfilled_ask\""
+input obj_fulfilled_ask_stddev_pop_order_by {
+    amount: order_by
+    ask_id: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    token_id: order_by
+}
+
+"order by stddev_samp() on columns of table \"obj_fulfilled_ask\""
+input obj_fulfilled_ask_stddev_samp_order_by {
+    amount: order_by
+    ask_id: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    token_id: order_by
+}
+
+"order by sum() on columns of table \"obj_fulfilled_ask\""
+input obj_fulfilled_ask_sum_order_by {
+    amount: order_by
+    ask_id: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    token_id: order_by
+}
+
+"order by var_pop() on columns of table \"obj_fulfilled_ask\""
+input obj_fulfilled_ask_var_pop_order_by {
+    amount: order_by
+    ask_id: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    token_id: order_by
+}
+
+"order by var_samp() on columns of table \"obj_fulfilled_ask\""
+input obj_fulfilled_ask_var_samp_order_by {
+    amount: order_by
+    ask_id: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    token_id: order_by
+}
+
+"order by variance() on columns of table \"obj_fulfilled_ask\""
+input obj_fulfilled_ask_variance_order_by {
+    amount: order_by
+    ask_id: order_by
+    id: order_by
+    level: order_by
+    price: order_by
+    token_id: order_by
+}
+
+"order by aggregate values of table \"sales_stat\""
+input sales_stat_aggregate_order_by {
+    avg: sales_stat_avg_order_by
+    count: order_by
+    max: sales_stat_max_order_by
+    min: sales_stat_min_order_by
+    stddev: sales_stat_stddev_order_by
+    stddev_pop: sales_stat_stddev_pop_order_by
+    stddev_samp: sales_stat_stddev_samp_order_by
+    sum: sales_stat_sum_order_by
+    var_pop: sales_stat_var_pop_order_by
+    var_samp: sales_stat_var_samp_order_by
+    variance: sales_stat_variance_order_by
+}
+
+"order by avg() on columns of table \"sales_stat\""
+input sales_stat_avg_order_by {
+    id: order_by
+    interval_days: order_by
+    rank: order_by
+    volume: order_by
+}
+
+"Boolean expression to filter rows from the table \"sales_stat\". All fields are combined with a logical 'AND'."
+input sales_stat_bool_exp {
+    _and: [sales_stat_bool_exp!]
+    _not: sales_stat_bool_exp
+    _or: [sales_stat_bool_exp!]
+    id: smallint_comparison_exp
+    interval_days: smallint_comparison_exp
+    rank: smallint_comparison_exp
+    subject: holder_bool_exp
+    subject_id: String_comparison_exp
+    type: sales_stat_type_comparison_exp
+    volume: bigint_comparison_exp
+}
+
+"order by max() on columns of table \"sales_stat\""
+input sales_stat_max_order_by {
+    id: order_by
+    interval_days: order_by
+    rank: order_by
+    subject_id: order_by
+    volume: order_by
+}
+
+"order by min() on columns of table \"sales_stat\""
+input sales_stat_min_order_by {
+    id: order_by
+    interval_days: order_by
+    rank: order_by
+    subject_id: order_by
+    volume: order_by
+}
+
+"Ordering options when selecting data from \"sales_stat\"."
+input sales_stat_order_by {
+    id: order_by
+    interval_days: order_by
+    rank: order_by
+    subject: holder_order_by
+    subject_id: order_by
+    type: order_by
+    volume: order_by
+}
+
+"order by stddev() on columns of table \"sales_stat\""
+input sales_stat_stddev_order_by {
+    id: order_by
+    interval_days: order_by
+    rank: order_by
+    volume: order_by
+}
+
+"order by stddev_pop() on columns of table \"sales_stat\""
+input sales_stat_stddev_pop_order_by {
+    id: order_by
+    interval_days: order_by
+    rank: order_by
+    volume: order_by
+}
+
+"order by stddev_samp() on columns of table \"sales_stat\""
+input sales_stat_stddev_samp_order_by {
+    id: order_by
+    interval_days: order_by
+    rank: order_by
+    volume: order_by
+}
+
+"order by sum() on columns of table \"sales_stat\""
+input sales_stat_sum_order_by {
+    id: order_by
+    interval_days: order_by
+    rank: order_by
+    volume: order_by
+}
+
+"Boolean expression to compare columns of type \"sales_stat_type\". All fields are combined with logical 'AND'."
+input sales_stat_type_comparison_exp {
+    _eq: sales_stat_type
+    _gt: sales_stat_type
+    _gte: sales_stat_type
+    _in: [sales_stat_type!]
+    _is_null: Boolean
+    _lt: sales_stat_type
+    _lte: sales_stat_type
+    _neq: sales_stat_type
+    _nin: [sales_stat_type!]
+}
+
+"order by var_pop() on columns of table \"sales_stat\""
+input sales_stat_var_pop_order_by {
+    id: order_by
+    interval_days: order_by
+    rank: order_by
+    volume: order_by
+}
+
+"order by var_samp() on columns of table \"sales_stat\""
+input sales_stat_var_samp_order_by {
+    id: order_by
+    interval_days: order_by
+    rank: order_by
+    volume: order_by
+}
+
+"order by variance() on columns of table \"sales_stat\""
+input sales_stat_variance_order_by {
+    id: order_by
+    interval_days: order_by
+    rank: order_by
+    volume: order_by
+}
+
+"Boolean expression to compare columns of type \"shareholder_status_type\". All fields are combined with logical 'AND'."
+input shareholder_status_type_comparison_exp {
+    _eq: shareholder_status_type
+    _gt: shareholder_status_type
+    _gte: shareholder_status_type
+    _in: [shareholder_status_type!]
+    _is_null: Boolean
+    _lt: shareholder_status_type
+    _lte: shareholder_status_type
+    _neq: shareholder_status_type
+    _nin: [shareholder_status_type!]
+}
+
+"Boolean expression to compare columns of type \"smallint\". All fields are combined with logical 'AND'."
+input smallint_comparison_exp {
+    _eq: smallint
+    _gt: smallint
+    _gte: smallint
+    _in: [smallint!]
+    _is_null: Boolean
+    _lt: smallint
+    _lte: smallint
+    _neq: smallint
+    _nin: [smallint!]
+}
+
+"Boolean expression to compare columns of type \"swap_status_type\". All fields are combined with logical 'AND'."
+input swap_status_type_comparison_exp {
+    _eq: swap_status_type
+    _gt: swap_status_type
+    _gte: swap_status_type
+    _in: [swap_status_type!]
+    _is_null: Boolean
+    _lt: swap_status_type
+    _lte: swap_status_type
+    _neq: swap_status_type
+    _nin: [swap_status_type!]
+}
+
+"Boolean expression to filter rows from the table \"tag\". All fields are combined with a logical 'AND'."
+input tag_bool_exp {
+    _and: [tag_bool_exp!]
+    _not: tag_bool_exp
+    _or: [tag_bool_exp!]
+    id: bigint_comparison_exp
+    name: String_comparison_exp
+    tag_tokens: token_tag_bool_exp
+}
+
+"Ordering options when selecting data from \"tag\"."
+input tag_order_by {
+    id: order_by
+    name: order_by
+    tag_tokens_aggregate: token_tag_aggregate_order_by
+}
+
+"Boolean expression to compare columns of type \"timestamptz\". All fields are combined with logical 'AND'."
+input timestamptz_comparison_exp {
+    _eq: timestamptz
+    _gt: timestamptz
+    _gte: timestamptz
+    _in: [timestamptz!]
+    _is_null: Boolean
+    _lt: timestamptz
+    _lte: timestamptz
+    _neq: timestamptz
+    _nin: [timestamptz!]
+}
+
+"order by aggregate values of table \"token\""
+input token_aggregate_order_by {
+    avg: token_avg_order_by
+    count: order_by
+    max: token_max_order_by
+    min: token_min_order_by
+    stddev: token_stddev_order_by
+    stddev_pop: token_stddev_pop_order_by
+    stddev_samp: token_stddev_samp_order_by
+    sum: token_sum_order_by
+    var_pop: token_var_pop_order_by
+    var_samp: token_var_samp_order_by
+    variance: token_variance_order_by
+}
+
+"order by aggregate values of table \"token_attribute\""
+input token_attribute_aggregate_order_by {
+    avg: token_attribute_avg_order_by
+    count: order_by
+    max: token_attribute_max_order_by
+    min: token_attribute_min_order_by
+    stddev: token_attribute_stddev_order_by
+    stddev_pop: token_attribute_stddev_pop_order_by
+    stddev_samp: token_attribute_stddev_samp_order_by
+    sum: token_attribute_sum_order_by
+    var_pop: token_attribute_var_pop_order_by
+    var_samp: token_attribute_var_samp_order_by
+    variance: token_attribute_variance_order_by
+}
+
+"order by avg() on columns of table \"token_attribute\""
+input token_attribute_avg_order_by {
+    attribute_id: order_by
+    id: order_by
+    token_id: order_by
+}
+
+"Boolean expression to filter rows from the table \"token_attribute\". All fields are combined with a logical 'AND'."
+input token_attribute_bool_exp {
+    _and: [token_attribute_bool_exp!]
+    _not: token_attribute_bool_exp
+    _or: [token_attribute_bool_exp!]
+    attribute: attribute_bool_exp
+    attribute_id: bigint_comparison_exp
+    id: Int_comparison_exp
+    token: token_bool_exp
+    token_id: bigint_comparison_exp
+}
+
+"order by max() on columns of table \"token_attribute\""
+input token_attribute_max_order_by {
+    attribute_id: order_by
+    id: order_by
+    token_id: order_by
+}
+
+"order by min() on columns of table \"token_attribute\""
+input token_attribute_min_order_by {
+    attribute_id: order_by
+    id: order_by
+    token_id: order_by
+}
+
+"Ordering options when selecting data from \"token_attribute\"."
+input token_attribute_order_by {
+    attribute: attribute_order_by
+    attribute_id: order_by
+    id: order_by
+    token: token_order_by
+    token_id: order_by
+}
+
+"order by stddev() on columns of table \"token_attribute\""
+input token_attribute_stddev_order_by {
+    attribute_id: order_by
+    id: order_by
+    token_id: order_by
+}
+
+"order by stddev_pop() on columns of table \"token_attribute\""
+input token_attribute_stddev_pop_order_by {
+    attribute_id: order_by
+    id: order_by
+    token_id: order_by
+}
+
+"order by stddev_samp() on columns of table \"token_attribute\""
+input token_attribute_stddev_samp_order_by {
+    attribute_id: order_by
+    id: order_by
+    token_id: order_by
+}
+
+"order by sum() on columns of table \"token_attribute\""
+input token_attribute_sum_order_by {
+    attribute_id: order_by
+    id: order_by
+    token_id: order_by
+}
+
+"order by var_pop() on columns of table \"token_attribute\""
+input token_attribute_var_pop_order_by {
+    attribute_id: order_by
+    id: order_by
+    token_id: order_by
+}
+
+"order by var_samp() on columns of table \"token_attribute\""
+input token_attribute_var_samp_order_by {
+    attribute_id: order_by
+    id: order_by
+    token_id: order_by
+}
+
+"order by variance() on columns of table \"token_attribute\""
+input token_attribute_variance_order_by {
+    attribute_id: order_by
+    id: order_by
+    token_id: order_by
+}
+
+"order by avg() on columns of table \"token\""
+input token_avg_order_by {
+    highest_bid: order_by
+    level: order_by
+    lowest_ask: order_by
+    pk_id: order_by
+    royalties: order_by
+    supply: order_by
+    thresh: order_by
+}
+
+"Boolean expression to filter rows from the table \"token\". All fields are combined with a logical 'AND'."
+input token_bool_exp {
+    _and: [token_bool_exp!]
+    _not: token_bool_exp
+    _or: [token_bool_exp!]
+    artifact_uri: String_comparison_exp
+    asks: obj_ask_bool_exp
+    bids: obj_bid_bool_exp
+    creator: holder_bool_exp
+    creator_id: String_comparison_exp
+    description: String_comparison_exp
+    display_uri: String_comparison_exp
+    dutch_auctions: obj_dutch_auction_bool_exp
+    english_auctions: obj_english_auction_bool_exp
+    events: event_bool_exp
+    extra: jsonb_comparison_exp
+    fa2: fa2_bool_exp
+    fa2_id: String_comparison_exp
+    flag: flag_type_comparison_exp
+    force_metadata_update: Boolean_comparison_exp
+    fulfilled_asks: obj_fulfilled_ask_bool_exp
+    highest_bid: bigint_comparison_exp
+    id: String_comparison_exp
+    is_signed: Boolean_comparison_exp
+    last_listed: timestamptz_comparison_exp
+    last_metadata_update: timestamptz_comparison_exp
+    level: bigint_comparison_exp
+    lowest_ask: bigint_comparison_exp
+    metadata: String_comparison_exp
+    mime: String_comparison_exp
+    pk_id: bigint_comparison_exp
+    royalties: smallint_comparison_exp
+    supply: bigint_comparison_exp
+    swaps: hen_swap_bool_exp
+    thresh: bigint_comparison_exp
+    thumbnail_uri: String_comparison_exp
+    timestamp: timestamptz_comparison_exp
+    title: String_comparison_exp
+    token_attributes: token_attribute_bool_exp
+    token_holders: token_holder_bool_exp
+    token_signatures: hen_split_signature_bool_exp
+    token_tags: token_tag_bool_exp
+    trades: hen_trade_bool_exp
+}
+
+"order by aggregate values of table \"token_holder\""
+input token_holder_aggregate_order_by {
+    avg: token_holder_avg_order_by
+    count: order_by
+    max: token_holder_max_order_by
+    min: token_holder_min_order_by
+    stddev: token_holder_stddev_order_by
+    stddev_pop: token_holder_stddev_pop_order_by
+    stddev_samp: token_holder_stddev_samp_order_by
+    sum: token_holder_sum_order_by
+    var_pop: token_holder_var_pop_order_by
+    var_samp: token_holder_var_samp_order_by
+    variance: token_holder_variance_order_by
+}
+
+"order by avg() on columns of table \"token_holder\""
+input token_holder_avg_order_by {
+    id: order_by
+    quantity: order_by
+    token_id: order_by
+}
+
+"Boolean expression to filter rows from the table \"token_holder\". All fields are combined with a logical 'AND'."
+input token_holder_bool_exp {
+    _and: [token_holder_bool_exp!]
+    _not: token_holder_bool_exp
+    _or: [token_holder_bool_exp!]
+    holder: holder_bool_exp
+    holder_id: String_comparison_exp
+    id: Int_comparison_exp
+    last_incremented: timestamptz_comparison_exp
+    quantity: bigint_comparison_exp
+    token: token_bool_exp
+    token_id: bigint_comparison_exp
+}
+
+"order by max() on columns of table \"token_holder\""
+input token_holder_max_order_by {
+    holder_id: order_by
+    id: order_by
+    last_incremented: order_by
+    quantity: order_by
+    token_id: order_by
+}
+
+"order by min() on columns of table \"token_holder\""
+input token_holder_min_order_by {
+    holder_id: order_by
+    id: order_by
+    last_incremented: order_by
+    quantity: order_by
+    token_id: order_by
+}
+
+"Ordering options when selecting data from \"token_holder\"."
+input token_holder_order_by {
+    holder: holder_order_by
+    holder_id: order_by
+    id: order_by
+    last_incremented: order_by
+    quantity: order_by
+    token: token_order_by
+    token_id: order_by
+}
+
+"order by stddev() on columns of table \"token_holder\""
+input token_holder_stddev_order_by {
+    id: order_by
+    quantity: order_by
+    token_id: order_by
+}
+
+"order by stddev_pop() on columns of table \"token_holder\""
+input token_holder_stddev_pop_order_by {
+    id: order_by
+    quantity: order_by
+    token_id: order_by
+}
+
+"order by stddev_samp() on columns of table \"token_holder\""
+input token_holder_stddev_samp_order_by {
+    id: order_by
+    quantity: order_by
+    token_id: order_by
+}
+
+"order by sum() on columns of table \"token_holder\""
+input token_holder_sum_order_by {
+    id: order_by
+    quantity: order_by
+    token_id: order_by
+}
+
+"order by var_pop() on columns of table \"token_holder\""
+input token_holder_var_pop_order_by {
+    id: order_by
+    quantity: order_by
+    token_id: order_by
+}
+
+"order by var_samp() on columns of table \"token_holder\""
+input token_holder_var_samp_order_by {
+    id: order_by
+    quantity: order_by
+    token_id: order_by
+}
+
+"order by variance() on columns of table \"token_holder\""
+input token_holder_variance_order_by {
+    id: order_by
+    quantity: order_by
+    token_id: order_by
+}
+
+"order by max() on columns of table \"token\""
+input token_max_order_by {
+    artifact_uri: order_by
+    creator_id: order_by
+    description: order_by
+    display_uri: order_by
+    fa2_id: order_by
+    highest_bid: order_by
+    id: order_by
+    last_listed: order_by
+    last_metadata_update: order_by
+    level: order_by
+    lowest_ask: order_by
+    metadata: order_by
+    mime: order_by
+    pk_id: order_by
+    royalties: order_by
+    supply: order_by
+    thresh: order_by
+    thumbnail_uri: order_by
+    timestamp: order_by
+    title: order_by
+}
+
+"order by min() on columns of table \"token\""
+input token_min_order_by {
+    artifact_uri: order_by
+    creator_id: order_by
+    description: order_by
+    display_uri: order_by
+    fa2_id: order_by
+    highest_bid: order_by
+    id: order_by
+    last_listed: order_by
+    last_metadata_update: order_by
+    level: order_by
+    lowest_ask: order_by
+    metadata: order_by
+    mime: order_by
+    pk_id: order_by
+    royalties: order_by
+    supply: order_by
+    thresh: order_by
+    thumbnail_uri: order_by
+    timestamp: order_by
+    title: order_by
+}
+
+"Ordering options when selecting data from \"token\"."
+input token_order_by {
+    artifact_uri: order_by
+    asks_aggregate: obj_ask_aggregate_order_by
+    bids_aggregate: obj_bid_aggregate_order_by
+    creator: holder_order_by
+    creator_id: order_by
+    description: order_by
+    display_uri: order_by
+    dutch_auctions_aggregate: obj_dutch_auction_aggregate_order_by
+    english_auctions_aggregate: obj_english_auction_aggregate_order_by
+    events_aggregate: event_aggregate_order_by
+    extra: order_by
+    fa2: fa2_order_by
+    fa2_id: order_by
+    flag: order_by
+    force_metadata_update: order_by
+    fulfilled_asks_aggregate: obj_fulfilled_ask_aggregate_order_by
+    highest_bid: order_by
+    id: order_by
+    is_signed: order_by
+    last_listed: order_by
+    last_metadata_update: order_by
+    level: order_by
+    lowest_ask: order_by
+    metadata: order_by
+    mime: order_by
+    pk_id: order_by
+    royalties: order_by
+    supply: order_by
+    swaps_aggregate: hen_swap_aggregate_order_by
+    thresh: order_by
+    thumbnail_uri: order_by
+    timestamp: order_by
+    title: order_by
+    token_attributes_aggregate: token_attribute_aggregate_order_by
+    token_holders_aggregate: token_holder_aggregate_order_by
+    token_signatures_aggregate: hen_split_signature_aggregate_order_by
+    token_tags_aggregate: token_tag_aggregate_order_by
+    trades_aggregate: hen_trade_aggregate_order_by
+}
+
+"order by stddev() on columns of table \"token\""
+input token_stddev_order_by {
+    highest_bid: order_by
+    level: order_by
+    lowest_ask: order_by
+    pk_id: order_by
+    royalties: order_by
+    supply: order_by
+    thresh: order_by
+}
+
+"order by stddev_pop() on columns of table \"token\""
+input token_stddev_pop_order_by {
+    highest_bid: order_by
+    level: order_by
+    lowest_ask: order_by
+    pk_id: order_by
+    royalties: order_by
+    supply: order_by
+    thresh: order_by
+}
+
+"order by stddev_samp() on columns of table \"token\""
+input token_stddev_samp_order_by {
+    highest_bid: order_by
+    level: order_by
+    lowest_ask: order_by
+    pk_id: order_by
+    royalties: order_by
+    supply: order_by
+    thresh: order_by
+}
+
+"order by sum() on columns of table \"token\""
+input token_sum_order_by {
+    highest_bid: order_by
+    level: order_by
+    lowest_ask: order_by
+    pk_id: order_by
+    royalties: order_by
+    supply: order_by
+    thresh: order_by
+}
+
+"order by aggregate values of table \"token_tag\""
+input token_tag_aggregate_order_by {
+    avg: token_tag_avg_order_by
+    count: order_by
+    max: token_tag_max_order_by
+    min: token_tag_min_order_by
+    stddev: token_tag_stddev_order_by
+    stddev_pop: token_tag_stddev_pop_order_by
+    stddev_samp: token_tag_stddev_samp_order_by
+    sum: token_tag_sum_order_by
+    var_pop: token_tag_var_pop_order_by
+    var_samp: token_tag_var_samp_order_by
+    variance: token_tag_variance_order_by
+}
+
+"order by avg() on columns of table \"token_tag\""
+input token_tag_avg_order_by {
+    id: order_by
+    tag_id: order_by
+    token_id: order_by
+}
+
+"Boolean expression to filter rows from the table \"token_tag\". All fields are combined with a logical 'AND'."
+input token_tag_bool_exp {
+    _and: [token_tag_bool_exp!]
+    _not: token_tag_bool_exp
+    _or: [token_tag_bool_exp!]
+    id: Int_comparison_exp
+    tag: tag_bool_exp
+    tag_id: bigint_comparison_exp
+    token: token_bool_exp
+    token_id: bigint_comparison_exp
+}
+
+"order by max() on columns of table \"token_tag\""
+input token_tag_max_order_by {
+    id: order_by
+    tag_id: order_by
+    token_id: order_by
+}
+
+"order by min() on columns of table \"token_tag\""
+input token_tag_min_order_by {
+    id: order_by
+    tag_id: order_by
+    token_id: order_by
+}
+
+"Ordering options when selecting data from \"token_tag\"."
+input token_tag_order_by {
+    id: order_by
+    tag: tag_order_by
+    tag_id: order_by
+    token: token_order_by
+    token_id: order_by
+}
+
+"order by stddev() on columns of table \"token_tag\""
+input token_tag_stddev_order_by {
+    id: order_by
+    tag_id: order_by
+    token_id: order_by
+}
+
+"order by stddev_pop() on columns of table \"token_tag\""
+input token_tag_stddev_pop_order_by {
+    id: order_by
+    tag_id: order_by
+    token_id: order_by
+}
+
+"order by stddev_samp() on columns of table \"token_tag\""
+input token_tag_stddev_samp_order_by {
+    id: order_by
+    tag_id: order_by
+    token_id: order_by
+}
+
+"order by sum() on columns of table \"token_tag\""
+input token_tag_sum_order_by {
+    id: order_by
+    tag_id: order_by
+    token_id: order_by
+}
+
+"order by var_pop() on columns of table \"token_tag\""
+input token_tag_var_pop_order_by {
+    id: order_by
+    tag_id: order_by
+    token_id: order_by
+}
+
+"order by var_samp() on columns of table \"token_tag\""
+input token_tag_var_samp_order_by {
+    id: order_by
+    tag_id: order_by
+    token_id: order_by
+}
+
+"order by variance() on columns of table \"token_tag\""
+input token_tag_variance_order_by {
+    id: order_by
+    tag_id: order_by
+    token_id: order_by
+}
+
+"order by var_pop() on columns of table \"token\""
+input token_var_pop_order_by {
+    highest_bid: order_by
+    level: order_by
+    lowest_ask: order_by
+    pk_id: order_by
+    royalties: order_by
+    supply: order_by
+    thresh: order_by
+}
+
+"order by var_samp() on columns of table \"token\""
+input token_var_samp_order_by {
+    highest_bid: order_by
+    level: order_by
+    lowest_ask: order_by
+    pk_id: order_by
+    royalties: order_by
+    supply: order_by
+    thresh: order_by
+}
+
+"order by variance() on columns of table \"token\""
+input token_variance_order_by {
+    highest_bid: order_by
+    level: order_by
+    lowest_ask: order_by
+    pk_id: order_by
+    royalties: order_by
+    supply: order_by
+    thresh: order_by
+}
+
+"order by aggregate values of table \"tzd_domain\""
+input tzd_domain_aggregate_order_by {
+    avg: tzd_domain_avg_order_by
+    count: order_by
+    max: tzd_domain_max_order_by
+    min: tzd_domain_min_order_by
+    stddev: tzd_domain_stddev_order_by
+    stddev_pop: tzd_domain_stddev_pop_order_by
+    stddev_samp: tzd_domain_stddev_samp_order_by
+    sum: tzd_domain_sum_order_by
+    var_pop: tzd_domain_var_pop_order_by
+    var_samp: tzd_domain_var_samp_order_by
+    variance: tzd_domain_variance_order_by
+}
+
+"order by avg() on columns of table \"tzd_domain\""
+input tzd_domain_avg_order_by {
+    token_id: order_by
+}
+
+"Boolean expression to filter rows from the table \"tzd_domain\". All fields are combined with a logical 'AND'."
+input tzd_domain_bool_exp {
+    _and: [tzd_domain_bool_exp!]
+    _not: tzd_domain_bool_exp
+    _or: [tzd_domain_bool_exp!]
+    expiry: timestamptz_comparison_exp
+    id: String_comparison_exp
+    owner: String_comparison_exp
+    records: tzd_record_bool_exp
+    tld: tzd_tld_bool_exp
+    tld_id: String_comparison_exp
+    token_id: bigint_comparison_exp
+}
+
+"order by max() on columns of table \"tzd_domain\""
+input tzd_domain_max_order_by {
+    expiry: order_by
+    id: order_by
+    owner: order_by
+    tld_id: order_by
+    token_id: order_by
+}
+
+"order by min() on columns of table \"tzd_domain\""
+input tzd_domain_min_order_by {
+    expiry: order_by
+    id: order_by
+    owner: order_by
+    tld_id: order_by
+    token_id: order_by
+}
+
+"Ordering options when selecting data from \"tzd_domain\"."
+input tzd_domain_order_by {
+    expiry: order_by
+    id: order_by
+    owner: order_by
+    records_aggregate: tzd_record_aggregate_order_by
+    tld: tzd_tld_order_by
+    tld_id: order_by
+    token_id: order_by
+}
+
+"order by stddev() on columns of table \"tzd_domain\""
+input tzd_domain_stddev_order_by {
+    token_id: order_by
+}
+
+"order by stddev_pop() on columns of table \"tzd_domain\""
+input tzd_domain_stddev_pop_order_by {
+    token_id: order_by
+}
+
+"order by stddev_samp() on columns of table \"tzd_domain\""
+input tzd_domain_stddev_samp_order_by {
+    token_id: order_by
+}
+
+"order by sum() on columns of table \"tzd_domain\""
+input tzd_domain_sum_order_by {
+    token_id: order_by
+}
+
+"order by var_pop() on columns of table \"tzd_domain\""
+input tzd_domain_var_pop_order_by {
+    token_id: order_by
+}
+
+"order by var_samp() on columns of table \"tzd_domain\""
+input tzd_domain_var_samp_order_by {
+    token_id: order_by
+}
+
+"order by variance() on columns of table \"tzd_domain\""
+input tzd_domain_variance_order_by {
+    token_id: order_by
+}
+
+"order by aggregate values of table \"tzd_record\""
+input tzd_record_aggregate_order_by {
+    count: order_by
+    max: tzd_record_max_order_by
+    min: tzd_record_min_order_by
+}
+
+"Boolean expression to filter rows from the table \"tzd_record\". All fields are combined with a logical 'AND'."
+input tzd_record_bool_exp {
+    _and: [tzd_record_bool_exp!]
+    _not: tzd_record_bool_exp
+    _or: [tzd_record_bool_exp!]
+    domain: tzd_domain_bool_exp
+    domain_id: String_comparison_exp
+    id: String_comparison_exp
+    target: holder_bool_exp
+    target_id: String_comparison_exp
+}
+
+"order by max() on columns of table \"tzd_record\""
+input tzd_record_max_order_by {
+    domain_id: order_by
+    id: order_by
+    target_id: order_by
+}
+
+"order by min() on columns of table \"tzd_record\""
+input tzd_record_min_order_by {
+    domain_id: order_by
+    id: order_by
+    target_id: order_by
+}
+
+"Ordering options when selecting data from \"tzd_record\"."
+input tzd_record_order_by {
+    domain: tzd_domain_order_by
+    domain_id: order_by
+    id: order_by
+    target: holder_order_by
+    target_id: order_by
+}
+
+"Boolean expression to filter rows from the table \"tzd_tld\". All fields are combined with a logical 'AND'."
+input tzd_tld_bool_exp {
+    _and: [tzd_tld_bool_exp!]
+    _not: tzd_tld_bool_exp
+    _or: [tzd_tld_bool_exp!]
+    domains: tzd_domain_bool_exp
+    id: String_comparison_exp
+    owner: String_comparison_exp
+}
+
+"Ordering options when selecting data from \"tzd_tld\"."
+input tzd_tld_order_by {
+    domains_aggregate: tzd_domain_aggregate_order_by
+    id: order_by
+    owner: order_by
+}
+
+
+scalar auction_status_type
+
+scalar bigint
+
+scalar collection_type
+
+scalar event_type
+
+scalar flag_type
+
+scalar holder_type
+
+scalar jsonb
+
+scalar sales_stat_type
+
+scalar shareholder_status_type
+
+scalar smallint
+
+scalar swap_status_type
+
+scalar timestamptz

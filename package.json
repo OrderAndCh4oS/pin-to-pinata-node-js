@@ -1,0 +1,10 @@
+{
+  "type": "module",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "bottleneck": "^2.19.5",
+    "dotenv": "^10.0.0",
+    "gql": "^1.1.2",
+    "graphql-request": "^3.7.0"
+  }
+}
